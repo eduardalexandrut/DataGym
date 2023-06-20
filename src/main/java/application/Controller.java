@@ -2,17 +2,17 @@ package application;
 
 import entity.Utenti;
 import jakarta.persistence.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.hibernate.query.Query;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -36,44 +36,77 @@ public class Controller {
     @FXML
     private TextField usernameField;
     @FXML
-    private BorderPane homeBPane;
+    private TextField heightField;
     @FXML
-    private GridPane usersTable;
+    private TableView<Utenti> usersTable;
+    @FXML
+    private TableColumn<Utenti, String> usernameColumn;
+    @FXML
+    private TableColumn<Utenti, String> nameColumn;
+    @FXML
+    private TableColumn<Utenti, String> surnameColumn;
+    @FXML
+    private TableColumn<Utenti, String> emailColumn;
+    @FXML
+    private TableColumn<Utenti, String> genderColumn;
+    @FXML
+    private TableColumn<Utenti, String> birthColumn;
+    @FXML
+    private TableColumn<Utenti, String> heightColumn;
 
     //Profile fx elements.
-    @FXML
-    private Label usernameLabel;
-    @FXML
-    private TextField userSearchBox;
 
     @FXML
     void initialize() {
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("username"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("nome"));
+        surnameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("cognome"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("email"));
+        birthColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("data_nascita"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("altezza"));
+        genderColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("sesso"));
+        ObservableList<Utenti> users = FXCollections.observableArrayList();
         try {
-            TypedQuery<Utenti> empGetAllUsersQuery = entityManager.createNamedQuery("Utenti.getAllUsers", Utenti.class);
-            for(var elem : empGetAllUsersQuery.getResultList()) {
-                this.usersTable.add(new Label(elem.getUsername()),0, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
-                this.usersTable.add(new Label(elem.getNome()),1, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
-                this.usersTable.add(new Label(elem.getCognome()),2, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
-                this.usersTable.add(new Label(elem.getSesso()),3, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
-                this.usersTable.add(new Label(elem.getEmail()),4, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
-                this.usersTable.add(new Label(elem.getDataNascita().toString()),5, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+            transaction.begin();
+            Query<Utenti> nativeQuery = (Query<Utenti>) entityManager.createNativeQuery("SELECT * FROM Utenti", Utenti.class);
+            for (final var elem : nativeQuery.getResultList()) {
+                users.add(elem);
             }
+            System.out.println(nativeQuery.getResultList());
+            usersTable.setItems(users);
+            transaction.commit();
             genderField.getItems().setAll(GENDERS);
         } finally {
             if(transaction.isActive()) {
                 transaction.rollback();
             }
-            entityManager.close();
-            entityManagerFactory.close();
         }
     }
     @FXML
     public void searchUser() {
         try {
-            TypedQuery<Utenti> empByUsernameQuery = entityManager.createNamedQuery("Utenti.byUsername", Utenti.class);
-            empByUsernameQuery.setParameter(1, userSearchBox.getText());
-            usernameLabel.setText(usernameLabel.getText() + empByUsernameQuery.getSingleResult().getUsername());
+            Query<Utenti> query = (Query<Utenti>) entityManager.createNativeQuery("SELECT * FROM Utenti u WHERE u.username = :username", Utenti.class);
+        } finally {
+            if(transaction.isActive()) {
+                transaction.rollback();
+            }
+        }
+    }
 
+    @FXML
+    public void addUser() {
+        try {
+            transaction.begin();
+            Utenti user = new Utenti();
+            user.setUsername(this.usernameField.getText());
+            user.setEmail(this.emailField.getText());
+            user.setNome(this.nameField.getText());
+            user.setCognome(this.nameField.getText());
+            user.setSesso(this.genderField.getValue());
+            user.setAltezza(BigDecimal.valueOf(Double.parseDouble(this.heightField.getText())));
+            user.setDataNascita(Date.valueOf(this.birthField.getValue()));
+            entityManager.persist(user);
+            transaction.commit();
         } finally {
             if(transaction.isActive()) {
                 transaction.rollback();
@@ -81,10 +114,6 @@ public class Controller {
             entityManager.close();
             entityManagerFactory.close();
         }
-    }
-
-    @FXML
-    public void addUser() {
 
     }
 }

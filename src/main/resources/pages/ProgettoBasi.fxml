@@ -8,15 +8,13 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <tabs>
@@ -36,6 +34,8 @@
                               <TextField fx:id="emailField" />
                               <Label text="Sesso:" />
                               <ChoiceBox fx:id="genderField" prefHeight="26.0" prefWidth="188.0" />
+                              <Label text="Altezza:" />
+                              <TextField fx:id="heightField" />
                               <Label text="Data di nascita:" />
                               <DatePicker fx:id="birthField" />
                               <Label text="Username:" />
@@ -52,64 +52,17 @@
                         </VBox>
                      </left>
                      <center>
-                        <Pane prefHeight="556.0" prefWidth="686.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <GridPane fx:id="usersTable" alignment="CENTER" hgap="10.0" layoutX="1.0" layoutY="14.0" prefHeight="30.0" prefWidth="710.0" style="-fx-background-color: white; -fx-border-color: black;" vgap="10.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label prefHeight="20.0" prefWidth="86.0" text="Username">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label prefHeight="18.0" prefWidth="59.0" text="Nome" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label prefHeight="20.0" prefWidth="92.0" text="Cognome" GridPane.columnIndex="2">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label prefHeight="18.0" prefWidth="59.0" text="Sesso" GridPane.columnIndex="3">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label prefHeight="20.0" prefWidth="125.0" text="Data_nascita" GridPane.columnIndex="5">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label prefHeight="18.0" prefWidth="94.0" text="Email" GridPane.columnIndex="4">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </GridPane>
-                           </children>
-                        </Pane>
+                        <TableView fx:id="usersTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
+                            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Nome" />
+                              <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="Cognome" />
+                              <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="heightColumn" prefWidth="75.0" text="Altezza" />
+                              <TableColumn fx:id="genderColumn" prefWidth="75.0" text="Sesso" />
+                              <TableColumn fx:id="birthColumn" prefWidth="99.19998168945312" text="Data di nascita" />
+                          </columns>
+                        </TableView>
                      </center>
                   </BorderPane>
                </children>
@@ -120,9 +73,95 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="userSearchBox" layoutX="7.0" layoutY="42.0" prefHeight="26.0" prefWidth="185.0" />
-                  <Button layoutX="209.0" layoutY="43.0" mnemonicParsing="false" onAction="#searchUser" text="Search" />
-                  <Label fx:id="usernameLabel" layoutX="14.0" layoutY="113.0" text="Utente:" />
+                  <BorderPane layoutX="261.0" layoutY="131.0" prefHeight="585.6" prefWidth="894.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <left>
+                        <VBox prefHeight="586.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #d6d4d4;" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="35.0" prefWidth="230.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="userSearchBox" prefHeight="26.0" prefWidth="157.0" />
+                                    <Button mnemonicParsing="false" onAction="#searchUser" prefHeight="26.0" prefWidth="57.0" text="Select" />
+                                 </children>
+                              </HBox>
+                              <Label fx:id="usernameLabel" text="Username: " />
+                              <Label fx:id="nameLabel" text="Nome:" />
+                              <Label fx:id="surnameLabel" text="Cognome:" />
+                              <Label fx:id="emailLabel" text="Email:" />
+                              <Label fx:id="heightLabel" text="Altezza:" />
+                              <Label fx:id="genderLabel" text="Sesso:" />
+                              <Label fx:id="birthLabel" text="Data di nascita:" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </left>
+                     <center>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                          <tabs>
+                            <Tab text="Pesi">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <BorderPane layoutX="232.0" layoutY="179.0" prefHeight="557.6" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <center>
+                                                <TableView prefHeight="558.0" prefWidth="295.0" BorderPane.alignment="CENTER">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="Valore" />
+                                                    <TableColumn prefWidth="75.0" text="Data" />
+                                                      <TableColumn prefWidth="75.0" text="UM" />
+                                                  </columns>
+                                                </TableView>
+                                             </center>
+                                             <right>
+                                                <VBox prefHeight="558.0" prefWidth="194.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <Label text="Peso:" />
+                                                      <TextField fx:id="weightField" prefHeight="26.0" prefWidth="166.0" />
+                                                      <Label text="Unità di misura:" />
+                                                      <ChoiceBox prefHeight="26.0" prefWidth="172.0" />
+                                                      <Label text="Data" />
+                                                      <DatePicker />
+                                                      <Button mnemonicParsing="false" text="Add +" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </right>
+                                          </BorderPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Allenamenti">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <BorderPane layoutX="186.0" layoutY="153.0" prefHeight="557.6" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <center>
+                                                <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="Data" />
+                                                    <TableColumn prefWidth="75.0" text="Scheda" />
+                                                      <TableColumn prefWidth="75.0" text="Inizio" />
+                                                      <TableColumn prefWidth="75.0" text="Fine" />
+                                                      <TableColumn prefWidth="75.0" text="Commento" />
+                                                  </columns>
+                                                </TableView>
+                                             </center>
+                                             <right>
+                                                <VBox prefHeight="558.0" prefWidth="193.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </center>
+                  </BorderPane>
                </children></AnchorPane>
       </content>
     </Tab>
