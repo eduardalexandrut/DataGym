@@ -8,6 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 
 public class Controller {
@@ -30,6 +31,8 @@ public class Controller {
     private TextField usernameField;
     @FXML
     private BorderPane homeBPane;
+    @FXML
+    private GridPane usersTable;
 
     //Profile fx elements.
     @FXML
@@ -42,7 +45,12 @@ public class Controller {
         try {
             TypedQuery<Utenti> empGetAllUsersQuery = entityManager.createNamedQuery("Utenti.getAllUsers", Utenti.class);
             for(var elem : empGetAllUsersQuery.getResultList()) {
-                System.out.println(elem);
+                this.usersTable.add(new Label(elem.getUsername()),0, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+                this.usersTable.add(new Label(elem.getNome()),1, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+                this.usersTable.add(new Label(elem.getCognome()),2, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+                this.usersTable.add(new Label(elem.getSesso()),3, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+                this.usersTable.add(new Label(elem.getEmail()),4, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
+                this.usersTable.add(new Label(elem.getDataNascita().toString()),5, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
             }
 
         } finally {
