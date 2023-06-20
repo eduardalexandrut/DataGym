@@ -1,13 +1,11 @@
 package application;
 
 import entity.Utenti;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
-import java.math.BigDecimal;
 
 public class Controller {
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
@@ -15,8 +13,17 @@ public class Controller {
     private final EntityTransaction transaction = entityManager.getTransaction();
 
     @FXML
-    public void createScheda() {
+    private Label usernameLabel;
+
+    @FXML
+    private TextField userSearchBox;
+
+    @FXML
+    public void searchUser() {
         try {
+            TypedQuery<Utenti> empByUsernameQuery = entityManager.createNamedQuery("Utenti.byUsername", Utenti.class);
+            empByUsernameQuery.setParameter(1, userSearchBox.getText());
+            usernameLabel.setText(usernameLabel.getText() + empByUsernameQuery.getSingleResult().getUsername());
 
         } finally {
             if(transaction.isActive()) {

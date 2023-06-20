@@ -17,8 +17,9 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField layoutX="14.0" layoutY="43.0" prefHeight="26.0" prefWidth="185.0" />
-                  <Button layoutX="209.0" layoutY="43.0" mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="userSearchBox" layoutX="14.0" layoutY="43.0" prefHeight="26.0" prefWidth="185.0" />
+                  <Button layoutX="209.0" layoutY="43.0" mnemonicParsing="false" onAction="#searchUser" text="Search" />
+                  <Label fx:id="usernameLabel" layoutX="14.0" layoutY="113.0" text="Utente:" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -32,7 +33,7 @@
                            <children>
                               <Label text="Name" />
                               <TextField prefHeight="32.0" prefWidth="160.0" />
-                              <Button mnemonicParsing="false" onAction="#createScheda" text="Add+" />
+                              <Button mnemonicParsing="false" text="Add+" />
                            </children>
                            <BorderPane.margin>
                               <Insets />
