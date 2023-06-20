@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,7 +16,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
@@ -77,12 +79,6 @@
                      <left>
                         <VBox prefHeight="586.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #d6d4d4;" BorderPane.alignment="CENTER">
                            <children>
-                              <HBox prefHeight="35.0" prefWidth="230.0" spacing="5.0">
-                                 <children>
-                                    <TextField fx:id="userSearchBox" prefHeight="26.0" prefWidth="157.0" />
-                                    <Button mnemonicParsing="false" onAction="#searchUser" prefHeight="26.0" prefWidth="57.0" text="Select" />
-                                 </children>
-                              </HBox>
                               <Label fx:id="usernameLabel" text="Username: " />
                               <Label fx:id="nameLabel" text="Nome:" />
                               <Label fx:id="surnameLabel" text="Cognome:" />
@@ -104,15 +100,6 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
                                           <BorderPane layoutX="232.0" layoutY="179.0" prefHeight="557.6" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <center>
-                                                <TableView prefHeight="558.0" prefWidth="295.0" BorderPane.alignment="CENTER">
-                                                  <columns>
-                                                    <TableColumn prefWidth="75.0" text="Valore" />
-                                                    <TableColumn prefWidth="75.0" text="Data" />
-                                                      <TableColumn prefWidth="75.0" text="UM" />
-                                                  </columns>
-                                                </TableView>
-                                             </center>
                                              <right>
                                                 <VBox prefHeight="558.0" prefWidth="194.0" spacing="10.0" BorderPane.alignment="CENTER">
                                                    <children>
@@ -129,6 +116,16 @@
                                                    </padding>
                                                 </VBox>
                                              </right>
+                                             <center>
+                                                <ScatterChart title="Pesi Corporei" BorderPane.alignment="CENTER">
+                                                  <xAxis>
+                                                    <CategoryAxis label="Date" side="BOTTOM" fx:id="x" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis fx:id="y" label="Weight" side="LEFT" />
+                                                  </yAxis>
+                                                </ScatterChart>
+                                             </center>
                                           </BorderPane>
                                        </children>
                                     </AnchorPane>

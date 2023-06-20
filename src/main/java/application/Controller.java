@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.query.Query;
@@ -55,6 +58,12 @@ public class Controller {
     private TableColumn<Utenti, String> heightColumn;
 
     //Profile fx elements.
+   /* @FXML
+    private LineChart<String, String> LineChart;*/
+    @FXML
+    private CategoryAxis x;
+    @FXML
+    private NumberAxis y;
 
     @FXML
     void initialize() {
@@ -97,15 +106,19 @@ public class Controller {
     public void addUser() {
         try {
             transaction.begin();
-            Utenti user = new Utenti();
-            user.setUsername(this.usernameField.getText());
-            user.setEmail(this.emailField.getText());
-            user.setNome(this.nameField.getText());
-            user.setCognome(this.nameField.getText());
-            user.setSesso(this.genderField.getValue());
-            user.setAltezza(BigDecimal.valueOf(Double.parseDouble(this.heightField.getText())));
-            user.setDataNascita(Date.valueOf(this.birthField.getValue()));
-            entityManager.persist(user);
+            Query query = (Query) entityManager.createNativeQuery(
+                    "INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
+                       "VALUES (?, ?, ?, ?, ?, ?, ?)");
+            query.setParameter(1, usernameField.getText());
+            query.setParameter(2, emailField.getText());
+            query.setParameter(3, nameField.getText());
+            query.setParameter(4, surnameField.getText());
+            query.setParameter(5, heightField.getText());
+            query.setParameter(6, genderField.getValue());
+            query.setParameter(7, birthField.getValue());
+            query.executeUpdate();
+            //initialize();
+
             transaction.commit();
         } finally {
             if(transaction.isActive()) {
