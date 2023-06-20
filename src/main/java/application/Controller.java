@@ -38,6 +38,22 @@ public class Controller {
     private TextField userSearchBox;
 
     @FXML
+    void initialize() {
+        try {
+            TypedQuery<Utenti> empGetAllUsersQuery = entityManager.createNamedQuery("Utenti.getAllUsers", Utenti.class);
+            for(var elem : empGetAllUsersQuery.getResultList()) {
+                System.out.println(elem);
+            }
+
+        } finally {
+            if(transaction.isActive()) {
+                transaction.rollback();
+            }
+            entityManager.close();
+            entityManagerFactory.close();
+        }
+    }
+    @FXML
     public void searchUser() {
         try {
             TypedQuery<Utenti> empByUsernameQuery = entityManager.createNamedQuery("Utenti.byUsername", Utenti.class);

@@ -7,6 +7,7 @@ import java.sql.Date;
 
 @Entity
 @NamedQuery(name = "Utenti.byUsername", query = "SELECT u FROM Utenti u WHERE u.username = ?1 ")
+@NamedQuery(name = "Utenti.getAllUsers", query = "FROM Utenti ")
 public class Utenti {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
