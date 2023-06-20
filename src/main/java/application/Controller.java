@@ -10,8 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Controller {
+    static final List<String> GENDERS = Collections.unmodifiableList(new ArrayList<>(){{add("M");add("F");}});
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
     private final EntityTransaction transaction = entityManager.getTransaction();
@@ -52,7 +58,7 @@ public class Controller {
                 this.usersTable.add(new Label(elem.getEmail()),4, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
                 this.usersTable.add(new Label(elem.getDataNascita().toString()),5, empGetAllUsersQuery.getResultList().indexOf(elem) + 1);
             }
-
+            genderField.getItems().setAll(GENDERS);
         } finally {
             if(transaction.isActive()) {
                 transaction.rollback();
