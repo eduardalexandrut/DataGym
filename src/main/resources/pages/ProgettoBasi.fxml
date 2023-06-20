@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="734.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="734.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <tabs>
     <Tab text="Utente">
       <content>
@@ -32,7 +32,7 @@
                            <children>
                               <Label text="Name" />
                               <TextField prefHeight="32.0" prefWidth="160.0" />
-                              <Button mnemonicParsing="false" text="Add+" />
+                              <Button mnemonicParsing="false" onAction="#createScheda" text="Add+" />
                            </children>
                            <BorderPane.margin>
                               <Insets />

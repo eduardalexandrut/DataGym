@@ -3,10 +3,11 @@ package entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 @Entity
-@Table(name = "utenti", schema = "datagym")
-public class UtentiEntity {
+@NamedQuery(name = "Utenti.byUsername", query = "SELECT u FROM Utenti u WHERE u.username = ?1 ")
+public class Utenti {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "username")
@@ -26,6 +27,9 @@ public class UtentiEntity {
     @Basic
     @Column(name = "sesso")
     private String sesso;
+    @Basic
+    @Column(name = "data_nascita")
+    private Date dataNascita;
 
     public String getUsername() {
         return username;
@@ -75,19 +79,28 @@ public class UtentiEntity {
         this.sesso = sesso;
     }
 
+    public Date getDataNascita() {
+        return dataNascita;
+    }
+
+    public void setDataNascita(Date dataNascita) {
+        this.dataNascita = dataNascita;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UtentiEntity that = (UtentiEntity) o;
+        Utenti utenti = (Utenti) o;
 
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (nome != null ? !nome.equals(that.nome) : that.nome != null) return false;
-        if (cognome != null ? !cognome.equals(that.cognome) : that.cognome != null) return false;
-        if (altezza != null ? !altezza.equals(that.altezza) : that.altezza != null) return false;
-        if (sesso != null ? !sesso.equals(that.sesso) : that.sesso != null) return false;
+        if (username != null ? !username.equals(utenti.username) : utenti.username != null) return false;
+        if (email != null ? !email.equals(utenti.email) : utenti.email != null) return false;
+        if (nome != null ? !nome.equals(utenti.nome) : utenti.nome != null) return false;
+        if (cognome != null ? !cognome.equals(utenti.cognome) : utenti.cognome != null) return false;
+        if (altezza != null ? !altezza.equals(utenti.altezza) : utenti.altezza != null) return false;
+        if (sesso != null ? !sesso.equals(utenti.sesso) : utenti.sesso != null) return false;
+        if (dataNascita != null ? !dataNascita.equals(utenti.dataNascita) : utenti.dataNascita != null) return false;
 
         return true;
     }
@@ -100,6 +113,20 @@ public class UtentiEntity {
         result = 31 * result + (cognome != null ? cognome.hashCode() : 0);
         result = 31 * result + (altezza != null ? altezza.hashCode() : 0);
         result = 31 * result + (sesso != null ? sesso.hashCode() : 0);
+        result = 31 * result + (dataNascita != null ? dataNascita.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Utenti{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", altezza=" + altezza +
+                ", sesso='" + sesso + '\'' +
+                ", dataNascita=" + dataNascita +
+                '}';
     }
 }
