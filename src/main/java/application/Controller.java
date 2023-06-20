@@ -3,8 +3,11 @@ package application;
 import entity.Utenti;
 import jakarta.persistence.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 
 public class Controller {
@@ -12,9 +15,25 @@ public class Controller {
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
     private final EntityTransaction transaction = entityManager.getTransaction();
 
+    //Home fx elements.
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField surnameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private ChoiceBox<String> genderField;
+    @FXML
+    private DatePicker birthField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private BorderPane homeBPane;
+
+    //Profile fx elements.
     @FXML
     private Label usernameLabel;
-
     @FXML
     private TextField userSearchBox;
 
@@ -32,5 +51,10 @@ public class Controller {
             entityManager.close();
             entityManagerFactory.close();
         }
+    }
+
+    @FXML
+    public void addUser() {
+
     }
 }
