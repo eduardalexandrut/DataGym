@@ -24,6 +24,7 @@ public class Controller {
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
     private final EntityTransaction transaction = entityManager.getTransaction();
+    private final QueryManager qManager = new QueryManager();
 
     //Home fx elements.
     @FXML
@@ -67,34 +68,15 @@ public class Controller {
 
     @FXML
     void initialize() {
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("username"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("nome"));
-        surnameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("cognome"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("email"));
-        birthColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("data_nascita"));
-        heightColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("altezza"));
-        genderColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("sesso"));
-        ObservableList<Utenti> users = FXCollections.observableArrayList();
-        try {
-            transaction.begin();
-            Query<Utenti> nativeQuery = (Query<Utenti>) entityManager.createNativeQuery("SELECT * FROM Utenti", Utenti.class);
-            for (final var elem : nativeQuery.getResultList()) {
-                users.add(elem);
-            }
-            System.out.println(nativeQuery.getResultList());
-            usersTable.setItems(users);
-            transaction.commit();
-            genderField.getItems().setAll(GENDERS);
-        } finally {
-            if(transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
+        initUsersTable();
+        genderField.getItems().setAll(GENDERS);
     }
     @FXML
     public void searchUser() {
         try {
-            Query<Utenti> query = (Query<Utenti>) entityManager.createNativeQuery("SELECT * FROM Utenti u WHERE u.username = :username", Utenti.class);
+            Query<Utenti> query = (Query<Utenti>) entityManager.createNativeQuery(
+                                "SELECT * FROM Utenti u WHERE u.username = :username",
+                                    Utenti.class);
         } finally {
             if(transaction.isActive()) {
                 transaction.rollback();
@@ -107,8 +89,8 @@ public class Controller {
         try {
             transaction.begin();
             Query query = (Query) entityManager.createNativeQuery(
-                    "INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
-                       "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                        "INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
             query.setParameter(1, usernameField.getText());
             query.setParameter(2, emailField.getText());
             query.setParameter(3, nameField.getText());
@@ -124,9 +106,18 @@ public class Controller {
             if(transaction.isActive()) {
                 transaction.rollback();
             }
-            entityManager.close();
-            entityManagerFactory.close();
         }
-
+    }
+    //Method to initialize the user's table.
+    private void initUsersTable() {
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("username"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("nome"));
+        surnameColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("cognome"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("email"));
+        birthColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("data_nascita"));
+        heightColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("altezza"));
+        genderColumn.setCellValueFactory(new PropertyValueFactory<Utenti,String>("sesso"));
+        ObservableList<Utenti> users = FXCollections.observableArrayList(qManager.getAllUsers().get().getResultList());
+        usersTable.setItems(users);
     }
 }
