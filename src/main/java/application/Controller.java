@@ -86,27 +86,18 @@ public class Controller {
 
     @FXML
     public void addUser() {
-        try {
-            transaction.begin();
-            Query query = (Query) entityManager.createNativeQuery(
-                        "INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
-            query.setParameter(1, usernameField.getText());
-            query.setParameter(2, emailField.getText());
-            query.setParameter(3, nameField.getText());
-            query.setParameter(4, surnameField.getText());
-            query.setParameter(5, heightField.getText());
-            query.setParameter(6, genderField.getValue());
-            query.setParameter(7, birthField.getValue());
-            query.executeUpdate();
-            //initialize();
+       if (qManager.addUser(
+                        usernameField.getText(),
+                        nameField.getText(),
+                        surnameField.getText(),
+                        emailField.getText(),
+                        birthField.getValue(),
+                        genderField.getValue(),
+                        heightField.getText())
+       ) {
+           initUsersTable();
+       };
 
-            transaction.commit();
-        } finally {
-            if(transaction.isActive()) {
-                transaction.rollback();
-            }
-        }
     }
     //Method to initialize the user's table.
     private void initUsersTable() {
