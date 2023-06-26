@@ -17,6 +17,7 @@ import java.util.List;
 
 public class Controller {
     static final List<String> GENDERS = List.of("M", "F");
+    static final List<String> SIZE_UNITS = List.of("Kg", "Lbs");
     private final QueryManager qManager = new QueryManager();
 
     //Home fx elements.
