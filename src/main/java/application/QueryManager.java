@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.time.LocalDate;
@@ -22,7 +23,6 @@ public class QueryManager {
         try {
             transaction.begin();
             result = Optional.of((Query<Utenti>) entityManager.createNativeQuery("SELECT * FROM Utenti", Utenti.class));
-
             transaction.commit();
         } finally {
             if(transaction.isActive()) {
