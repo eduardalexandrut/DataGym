@@ -5,17 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
-public class Controller {
+public class ControllerImpl {
     static final List<String> GENDERS = List.of("M", "F");
     static final List<String> SIZE_UNITS = List.of("Kg", "Lbs");
     private final QueryManager qManager = new QueryManager();
