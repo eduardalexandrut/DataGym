@@ -1,11 +1,7 @@
 package application;
 
-import entity.Utenti;
-import jakarta.persistence.*;
+import application.view.JavaFX;
 import javafx.application.Application;
-
-import java.math.BigDecimal;
-import java.sql.Date;
 
 public final class App {
     private App() { }

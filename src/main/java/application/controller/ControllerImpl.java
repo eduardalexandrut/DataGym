@@ -1,5 +1,6 @@
-package application;
+package application.controller;
 
+import application.model.QueryManager;
 import entity.Utenti;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
