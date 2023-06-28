@@ -13,10 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.List;
 
 
-public class ControllerImpl {
+public class ControllerImpl extends Controller {
     static final List<String> GENDERS = List.of("M", "F");
     static final List<String> SIZE_UNITS = List.of("Kg", "Lbs");
-    private final QueryManager qManager = new QueryManager();
+   // private final QueryManager qManager = new QueryManager();
+    private Utenti user;
 
     //Home fx elements.
     @FXML
@@ -70,7 +71,7 @@ public class ControllerImpl {
 
     @FXML
     public void addUser() {
-       if (qManager.addUser(usernameField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(),
+       if (getQueryManager().addUser(usernameField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(),
                         birthField.getValue(),
                         genderField.getValue(),
                         heightField.getText())
@@ -88,10 +89,16 @@ public class ControllerImpl {
         birthColumn.setCellValueFactory(new PropertyValueFactory<>("data_nascita"));
         heightColumn.setCellValueFactory(new PropertyValueFactory<>("altezza"));
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("sesso"));
-        final var ris = qManager.getAllUsers();
+        final var ris = getQueryManager().getAllUsers();
         if(ris.isPresent()) {
             ObservableList<Utenti> users = FXCollections.observableArrayList(ris.get().getResultList());
             usersTable.setItems(users);
         }
+    }
+    public Utenti getUser() {
+        return this.user;
+    }
+    public void setUser(final Utenti user) {
+        this.user = user;
     }
 }

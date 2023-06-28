@@ -165,7 +165,8 @@
                         </TabPane>
                      </center>
                   </BorderPane>
-               </children></AnchorPane>
+               </children>
+        </AnchorPane>
       </content>
     </Tab>
       <Tab text="Schede">
