@@ -14,17 +14,6 @@ import java.util.List;
 
 public class MainController extends Controller {
     private Utenti user;
-
-
-    //Profile fx elements.
-   /* @FXML
-    private LineChart<String, String> LineChart;*/
-    @FXML
-    private CategoryAxis x;
-    @FXML
-    private NumberAxis y;
-
-
     public Utenti getUser() {
         return this.user;
     }
