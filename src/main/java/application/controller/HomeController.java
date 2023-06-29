@@ -57,7 +57,6 @@ public class HomeController extends Controller {
         ) {
             initUsersTable();
         }
-
     }
 
     private void initUsersTable() {

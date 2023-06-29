@@ -8,6 +8,44 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:controller="application.controller.DietsController"
             prefHeight="400.0" prefWidth="600.0">
-
+        <children>
+            <BorderPane layoutX="144.0" layoutY="102.0" prefHeight="474.4" prefWidth="734.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <left>
+                    <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="474.0" prefWidth="194.0" spacing="10.0" style="-fx-background-color: #d6d4d4;" BorderPane.alignment="CENTER">
+                        <children>
+                            <Label text="Name" />
+                            <TextField prefHeight="32.0" prefWidth="160.0" />
+                            <Button mnemonicParsing="false" text="Add+" />
+                        </children>
+                    </VBox>
+                </left>
+                <center>
+                    <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                        <tabs>
+                            <Tab text="All">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <children>
+                                            <TableView layoutX="212.0" layoutY="179.0" prefHeight="557.6" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <columns>
+                                                    <TableColumn prefWidth="75.0" text="Nome" />
+                                                    <TableColumn prefWidth="75.0" text="cd" />
+                                                </columns>
+                                            </TableView>
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                            <Tab text="Details">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+                </center>
+            </BorderPane>
+        </children>
 </AnchorPane>
