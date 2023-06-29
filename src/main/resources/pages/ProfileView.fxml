@@ -52,7 +52,7 @@
                                                             <Label text="Unità di misura:" />
                                                             <ChoiceBox fx:id="measuresBox" prefHeight="26.0" prefWidth="172.0" />
                                                             <Label text="Data" />
-                                                            <DatePicker />
+                                                            <DatePicker fx:id="dataField" />
                                                             <Button mnemonicParsing="false" text="Add +" />
                                                         </children>
                                                         <padding>
@@ -81,7 +81,7 @@
                                         <children>
                                             <BorderPane layoutX="186.0" layoutY="153.0" prefHeight="557.6" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <center>
-                                                    <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                    <TableView prefHeight="371.0" prefWidth="160.0" BorderPane.alignment="CENTER">
                                                         <columns>
                                                             <TableColumn prefWidth="75.0" text="Data" />
                                                             <TableColumn prefWidth="75.0" text="Scheda" />
@@ -95,7 +95,7 @@
                                                     </TableView>
                                                 </center>
                                                 <right>
-                                                    <VBox prefHeight="558.0" prefWidth="193.0" BorderPane.alignment="CENTER" />
+                                                    <VBox prefHeight="371.0" prefWidth="184.0" BorderPane.alignment="CENTER" />
                                                 </right>
                                             </BorderPane>
                                         </children>

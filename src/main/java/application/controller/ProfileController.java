@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 
 import java.util.List;
 
@@ -18,6 +20,10 @@ public class ProfileController extends MainController {
     private NumberAxis y;
     @FXML
     private ChoiceBox<String> measuresBox;
+    @FXML
+    private TextField weightField;
+    @FXML
+    private DatePicker dataField;
 
     @FXML
     void initialize() {
