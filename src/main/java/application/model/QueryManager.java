@@ -1,6 +1,7 @@
 package application.model;
 
 import entity.Allenamenti;
+import entity.Schede;
 import entity.Utenti;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,5 +49,15 @@ public class QueryManager {
         return entityManager.createNativeQuery("SELECT * FROM allenamenti WHERE utente = :username", Allenamenti.class)
                 .setParameter("username", username)
                 .getResultList();
+    }
+
+    //Method to add a new scheda into the db.
+    public void addScheda(final String name, final String user, final LocalDate dataCreazione) {
+        entityManager.createNativeQuery("INSERT INTO schede (nomeScheda, data_creazione, utente)" +
+                "VALUES (:nomeScheda, :data_creazione, :utente)", Schede.class)
+                .setParameter("nomeScheda", name)
+                .setParameter("data_creazione", dataCreazione)
+                .setParameter("utente", user)
+                .executeUpdate();
     }
 }
