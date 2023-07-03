@@ -18,32 +18,21 @@
 <AnchorPane prefHeight="407.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ProfileController">
         <children>
             <BorderPane layoutX="261.0" layoutY="131.0" prefHeight="585.6" prefWidth="894.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <left>
-                    <VBox prefHeight="407.0" prefWidth="161.0" spacing="10.0" style="-fx-background-color: #d6d4d4;" BorderPane.alignment="CENTER">
-                        <children>
-                            <Label fx:id="usernameLabel" text="Username: " />
-                            <Label fx:id="nameLabel" text="Nome:" />
-                            <Label fx:id="surnameLabel" text="Cognome:" />
-                            <Label fx:id="emailLabel" text="Email:" />
-                            <Label fx:id="heightLabel" text="Altezza:" />
-                            <Label fx:id="genderLabel" text="Sesso:" />
-                            <Label fx:id="birthLabel" text="Data di nascita:" />
-                        </children>
-                        <padding>
-                            <Insets bottom="10.0" left="10.0" top="10.0" />
-                        </padding>
-                    </VBox>
-                </left>
                 <center>
                     <TabPane prefHeight="400.0" prefWidth="384.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                         <tabs>
+                  <Tab text="Dettagli">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
                             <Tab text="Pesi">
                                 <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                         <children>
                                             <BorderPane layoutX="232.0" layoutY="179.0" prefHeight="557.6" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <right>
-                                                    <VBox prefHeight="558.0" prefWidth="194.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                                    <VBox prefHeight="378.0" prefWidth="136.0" spacing="10.0" BorderPane.alignment="CENTER">
                                                         <children>
                                                             <Label text="Peso:" />
                                                             <TextField fx:id="weightField" prefHeight="26.0" prefWidth="166.0" />

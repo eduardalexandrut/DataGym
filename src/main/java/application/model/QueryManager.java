@@ -64,4 +64,11 @@ public class QueryManager {
                 .executeUpdate();
         transaction.commit();
     }
+
+    //Method to get all the schede of an utente.
+    public List<Schede> getSchede(final String user) {
+        return entityManager.createNativeQuery("SELECT * FROM schede WHERE utente = :utente", Schede.class)
+                .setParameter("utente", user)
+                .getResultList();
+    }
 }

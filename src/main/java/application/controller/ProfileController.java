@@ -47,7 +47,7 @@ public class ProfileController extends MainController {
 
     @FXML
     void initialize() {
-        System.out.println(getQueryManager().getAllenamenti("EduardT").get(0));
+        System.out.println(getQueryManager().getAllenamenti("EduardT"));
         this.measuresBox.getItems().setAll(MEASURE_UNITS);
         this.measuresBox.setValue(MEASURE_UNITS.stream().filter(e -> e.equals("Kg")).findAny().get());
 
