@@ -1,16 +1,21 @@
 package application.controller;
 
 import entity.Utenti;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HomeController extends Controller {
     static final List<String> GENDERS = List.of("M", "F");
+    private Utenti user;
     @FXML
     private TextField nameField;
     @FXML
@@ -46,17 +51,27 @@ public class HomeController extends Controller {
     void initialize() {
         initUsersTable();
         genderField.getItems().setAll(GENDERS);
+        usersTable.getSelectionModel().selectedItemProperty().addListener(e -> {
+            setUser(usersTable.getSelectionModel().getSelectedItem());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/ProfileView.fxml"));
+            try {
+                Parent root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            ProfileController controller = loader.getController();
+            controller.setUser(usersTable.getSelectionModel().getSelectedItem());
+            //controller.setUserInfo(usersTable.getSelectionModel().getSelectedItem());
+        });
     }
 
     @FXML
     public void addUser() {
-        if (getQueryManager().addUser(usernameField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(),
+        getQueryManager().addUser(usernameField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(),
                 birthField.getValue(),
                 genderField.getValue(),
-                heightField.getText())
-        ) {
-            initUsersTable();
-        }
+                heightField.getText());
+        initUsersTable();
     }
 
     private void initUsersTable() {
@@ -67,10 +82,13 @@ public class HomeController extends Controller {
         birthColumn.setCellValueFactory(new PropertyValueFactory<>("data_nascita"));
         heightColumn.setCellValueFactory(new PropertyValueFactory<>("altezza"));
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("sesso"));
-        final var ris = getQueryManager().getAllUsers();
-        if(ris.isPresent()) {
-            ObservableList<Utenti> users = FXCollections.observableArrayList(ris.get().getResultList());
-            usersTable.setItems(users);
-        }
+        ObservableList<Utenti> users = FXCollections.observableArrayList(getQueryManager().getAllUsers());
+        usersTable.setItems(users);
+    }
+    public Utenti getUser() {
+        return this.user;
+    }
+    public void setUser(final Utenti user) {
+        this.user = user;
     }
 }
