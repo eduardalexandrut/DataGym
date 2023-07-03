@@ -33,6 +33,7 @@ public class QueryManager {
                         final LocalDate birth,
                         final String gender,
                         final String height) {
+        transaction.begin();
         entityManager.createNativeQuery("INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
                 "VALUES (:username, :email, :nome, :cognome, :altezza, :sesso, :data_nascita)")
                 .setParameter("username", username)
@@ -42,6 +43,7 @@ public class QueryManager {
                 .setParameter("altezza", height)
                 .setParameter("sesso", gender)
                 .setParameter("data_nascita", birth).executeUpdate();
+        transaction.commit();
     }
 
     //Method to get all the allenamenti of a particular user.
@@ -53,11 +55,13 @@ public class QueryManager {
 
     //Method to add a new scheda into the db.
     public void addScheda(final String name, final String user, final LocalDate dataCreazione) {
+        transaction.begin();
         entityManager.createNativeQuery("INSERT INTO schede (nomeScheda, data_creazione, utente)" +
                 "VALUES (:nomeScheda, :data_creazione, :utente)", Schede.class)
                 .setParameter("nomeScheda", name)
                 .setParameter("data_creazione", dataCreazione)
                 .setParameter("utente", user)
                 .executeUpdate();
+        transaction.commit();
     }
 }
