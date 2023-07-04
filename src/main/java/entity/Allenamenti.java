@@ -1,15 +1,12 @@
 package entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Time;
 
 @Entity
-//
+//@IdClass(AllenamentiPK.class)
 public class Allenamenti {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -76,6 +73,18 @@ public class Allenamenti {
         this.scheda = scheda;
     }
 
+    @Basic
+    @Column(name = "commento")
+    private String commento;
+
+    public String getCommento() {
+        return commento;
+    }
+
+    public void setCommento(String commento) {
+        this.commento = commento;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,6 +97,7 @@ public class Allenamenti {
         if (oraFine != null ? !oraFine.equals(that.oraFine) : that.oraFine != null) return false;
         if (data != null ? !data.equals(that.data) : that.data != null) return false;
         if (utente != null ? !utente.equals(that.utente) : that.utente != null) return false;
+        if (commento != null ? !commento.equals(that.commento) : that.commento != null) return false;
 
         return true;
     }
@@ -99,6 +109,7 @@ public class Allenamenti {
         result = 31 * result + (data != null ? data.hashCode() : 0);
         result = 31 * result + (utente != null ? utente.hashCode() : 0);
         result = 31 * result + scheda;
+        result = 31 * result + (commento != null ? commento.hashCode() : 0);
         return result;
     }
 }
