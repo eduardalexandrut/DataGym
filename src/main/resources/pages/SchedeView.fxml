@@ -64,13 +64,13 @@
                            <children>
                               <BorderPane layoutX="61.0" layoutY="73.0" prefHeight="371.2" prefWidth="405.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <center>
-                                    <TableView prefHeight="371.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="allenamentiTable" prefHeight="371.0" prefWidth="160.0" BorderPane.alignment="CENTER">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="Data" />
-                                          <TableColumn prefWidth="75.0" text="Scheda" />
-                                          <TableColumn prefWidth="75.0" text="Inizio" />
-                                          <TableColumn prefWidth="75.0" text="Fine" />
-                                          <TableColumn prefWidth="75.0" text="Commento" />
+                                          <TableColumn fx:id="dateCol" prefWidth="75.0" text="Data" />
+                                          <TableColumn fx:id="schedaCol" prefWidth="75.0" text="Scheda" />
+                                          <TableColumn fx:id="startCol" prefWidth="75.0" text="Inizio" />
+                                          <TableColumn fx:id="endCol" prefWidth="75.0" text="Fine" />
+                                          <TableColumn fx:id="commentCol" prefWidth="75.0" text="Commento" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

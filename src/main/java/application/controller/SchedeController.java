@@ -25,6 +25,19 @@ public class SchedeController extends Controller {
     private TableColumn createdCol;
 
     @FXML
+    private TableView allenamentiTable;
+    @FXML
+    private TableColumn dateCol;
+    @FXML
+    private TableColumn schedaCol;
+    @FXML
+    private TableColumn startCol;
+    @FXML
+    private TableColumn stopCol;
+    @FXML
+    private TableColumn commentCol;
+
+    @FXML
     void initialize() {
         initSchedeTable();
         schedeTable.getSelectionModel()
@@ -46,7 +59,6 @@ public class SchedeController extends Controller {
 
     public void setScheda(final Schede scheda) {
         this.scheda = scheda;
-        System.out.println(this.scheda);
     }
 
     public Schede getScheda() {
