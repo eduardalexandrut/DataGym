@@ -34,7 +34,7 @@ public class QueryManager {
                         final String gender,
                         final String height) {
         transaction.begin();
-        entityManager.createNativeQuery("INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, data_nascita)" +
+        entityManager.createNativeQuery("INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, dataNascita)" +
                 "VALUES (:username, :email, :nome, :cognome, :altezza, :sesso, :data_nascita)")
                 .setParameter("username", username)
                 .setParameter("email", email)
@@ -42,7 +42,7 @@ public class QueryManager {
                 .setParameter("cognome", surname)
                 .setParameter("altezza", height)
                 .setParameter("sesso", gender)
-                .setParameter("data_nascita", birth).executeUpdate();
+                .setParameter("dataNascita", birth).executeUpdate();
         transaction.commit();
     }
 

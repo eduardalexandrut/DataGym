@@ -43,7 +43,7 @@ public class HomeController extends Controller {
     @FXML
     private TableColumn<Utenti, String> genderColumn;
     @FXML
-    private TableColumn<Utenti, String> birthColumn;
+    private TableColumn birthColumn;
     @FXML
     private TableColumn<Utenti, String> heightColumn;
 
@@ -79,7 +79,7 @@ public class HomeController extends Controller {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        birthColumn.setCellValueFactory(new PropertyValueFactory<>("data_nascita"));
+        birthColumn.setCellValueFactory(new PropertyValueFactory<>("dataNascita"));
         heightColumn.setCellValueFactory(new PropertyValueFactory<>("altezza"));
         genderColumn.setCellValueFactory(new PropertyValueFactory<>("sesso"));
         ObservableList<Utenti> users = FXCollections.observableArrayList(getQueryManager().getAllUsers());

@@ -29,7 +29,7 @@ public class Utenti {
     @Column(name = "sesso")
     private String sesso;
     @Basic
-    @Column(name = "data_nascita")
+    @Column(name = "dataNascita")
     private Date dataNascita;
 
     public String getUsername() {
