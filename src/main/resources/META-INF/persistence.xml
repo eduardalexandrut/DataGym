@@ -8,6 +8,8 @@
         <class>entity.Utenti</class>
         <class>entity.Schede</class>
         <class>entity.Allenamenti</class>
+        <class>entity.Diete</class>
+        <class>entity.Ricette</class>
 
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/datagym"/>
