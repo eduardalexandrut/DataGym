@@ -67,7 +67,6 @@ public class SchedeController extends Controller {
         endCol.setCellValueFactory(new PropertyValueFactory<Allenamenti, Time>("ora_fine"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("commento"));
         ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti("EduardT"));
-        allenamenti.stream().forEach(e-> System.out.println(e.toString()));
         allenamentiTable.setItems(allenamenti);
     }
 

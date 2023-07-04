@@ -112,4 +112,16 @@ public class Allenamenti {
         result = 31 * result + (commento != null ? commento.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Allenamenti{" +
+                "oraInizio=" + oraInizio +
+                ", oraFine=" + oraFine +
+                ", data=" + data +
+                ", utente='" + utente + '\'' +
+                ", scheda=" + scheda +
+                ", commento='" + commento + '\'' +
+                '}';
+    }
 }
