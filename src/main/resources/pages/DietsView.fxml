@@ -24,11 +24,11 @@
                            <children>
                               <BorderPane layoutX="164.0" layoutY="67.0" prefHeight="371.2" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <center>
-                                    <TableView prefHeight="557.6" prefWidth="700.0" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="dietsTable" prefHeight="557.6" prefWidth="700.0" BorderPane.alignment="CENTER">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="Nome" />
-                                          <TableColumn prefWidth="113.5999755859375" text="Data Creazione" />
-                                          <TableColumn prefWidth="75.0" text="Ricetta" />
+                                          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Nome" />
+                                          <TableColumn fx:id="createdCol" prefWidth="113.5999755859375" text="Data Creazione" />
+                                          <TableColumn fx:id="recipeeCol" prefWidth="75.0" text="Ricetta" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
