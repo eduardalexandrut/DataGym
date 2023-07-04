@@ -4,11 +4,16 @@ import entity.Diete;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.time.LocalDate;
+
 public class DietsController extends Controller {
+    @FXML
+    private Label todayDateLabel;
     @FXML
     private TableView dietsTable;
     @FXML
@@ -21,6 +26,7 @@ public class DietsController extends Controller {
     @FXML
     void initialize() {
         initDietsTable();
+        todayDateLabel.setText(String.valueOf(LocalDate.now()));
     }
 
     private void initDietsTable() {
