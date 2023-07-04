@@ -5,6 +5,7 @@ import entity.Schede;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -12,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 public class SchedeController extends Controller {
     private Schede scheda;
@@ -37,11 +39,17 @@ public class SchedeController extends Controller {
     private TableColumn endCol;
     @FXML
     private TableColumn commentCol;
+    @FXML
+    private ChoiceBox schedeChoiceBox;
 
     @FXML
     void initialize() {
         initSchedeTable();
         initSchedaAllenamenti();
+        schedeChoiceBox.getItems().setAll(getQueryManager().getSchede("EduardT")
+                .stream()
+                .map(e -> e.getNomeScheda())
+                .collect(Collectors.toList()));
         schedeTable.getSelectionModel()
                 .selectedItemProperty()
                 .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));

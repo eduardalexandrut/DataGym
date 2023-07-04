@@ -56,7 +56,7 @@ public class QueryManager {
     //Method to add a new scheda into the db.
     public void addScheda(final String name, final String user, final LocalDate dataCreazione) {
         transaction.begin();
-        entityManager.createNativeQuery("INSERT INTO schede (nomeScheda, data_creazione, utente)" +
+        entityManager.createNativeQuery("INSERT INTO schede (nomeScheda, dataCreazione, utente)" +
                 "VALUES (:nomeScheda, :data_creazione, :utente)", Schede.class)
                 .setParameter("nomeScheda", name)
                 .setParameter("data_creazione", dataCreazione)

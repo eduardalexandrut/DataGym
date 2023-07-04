@@ -86,7 +86,7 @@
                                           <VBox prefHeight="371.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
                                              <children>
                                                 <Label text="Scheda:" />
-                                                <ChoiceBox prefWidth="150.0" />
+                                                <ChoiceBox fx:id="schedeChoiceBox" prefWidth="150.0" />
                                                 <Label text="Start:" />
                                                 <TextField />
                                                 <Label text="End:" />
