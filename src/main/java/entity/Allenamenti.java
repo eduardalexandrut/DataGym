@@ -10,7 +10,7 @@ import java.sql.Time;
 public class Allenamenti {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @jakarta.persistence.Column(name = "ora_inizio")
+    @jakarta.persistence.Column(name = "oraInizio")
     private Time oraInizio;
 
     public Time getOraInizio() {
@@ -23,7 +23,7 @@ public class Allenamenti {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @jakarta.persistence.Column(name = "ora_fine")
+    @jakarta.persistence.Column(name = "oraFine")
     private Time oraFine;
 
     public Time getOraFine() {

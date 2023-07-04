@@ -14,7 +14,7 @@ public class Schede {
     @Column(name = "nomeScheda")
     private String nomeScheda;
     @Basic
-    @Column(name = "data_creazione")
+    @Column(name = "dataCreazione")
     private Date dataCreazione;
     @Basic
     @Column(name = "utente")

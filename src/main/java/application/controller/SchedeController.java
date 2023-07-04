@@ -54,7 +54,7 @@ public class SchedeController extends Controller {
 
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
-        createdCol.setCellValueFactory(new PropertyValueFactory<>("data_creazione"));
+        createdCol.setCellValueFactory(new PropertyValueFactory<>("dataCreazione"));
         ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede("EduardT"));
         schedeTable.setItems(schede);
     }
@@ -62,8 +62,8 @@ public class SchedeController extends Controller {
     public void initSchedaAllenamenti() {
         dateCol.setCellValueFactory(new PropertyValueFactory<>("data"));
         schedaCol.setCellValueFactory(new PropertyValueFactory<>("scheda"));
-        startCol.setCellValueFactory(new PropertyValueFactory<>("ora_inizio"));
-        endCol.setCellValueFactory(new PropertyValueFactory<Allenamenti, Time>("ora_fine"));
+        startCol.setCellValueFactory(new PropertyValueFactory<>("oraInizio"));
+        endCol.setCellValueFactory(new PropertyValueFactory<Allenamenti, Time>("oraFine"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("commento"));
         ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti("EduardT"));
         allenamentiTable.setItems(allenamenti);
