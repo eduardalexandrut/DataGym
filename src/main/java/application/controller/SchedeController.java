@@ -13,10 +13,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.LocalDate;
 
 public class SchedeController extends Controller {
+    private Schede scheda;
+
     @FXML
     private TextField schedaName;
     @FXML
-    private TableView schedeTable;
+    private TableView<Schede> schedeTable;
     @FXML
     private TableColumn schedaNameCol;
     @FXML
@@ -25,6 +27,9 @@ public class SchedeController extends Controller {
     @FXML
     void initialize() {
         initSchedeTable();
+        schedeTable.getSelectionModel()
+                .selectedItemProperty()
+                .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
     }
     @FXML
     public void addScheda() {
@@ -37,5 +42,14 @@ public class SchedeController extends Controller {
         createdCol.setCellValueFactory(new PropertyValueFactory<>("data_creazione"));
         ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede("EduardT"));
         schedeTable.setItems(schede);
+    }
+
+    public void setScheda(final Schede scheda) {
+        this.scheda = scheda;
+        System.out.println(this.scheda);
+    }
+
+    public Schede getScheda() {
+        return this.scheda;
     }
 }
