@@ -1,6 +1,7 @@
 package application.model;
 
 import entity.Allenamenti;
+import entity.Diete;
 import entity.Schede;
 import entity.Utenti;
 import jakarta.persistence.EntityManager;
@@ -68,6 +69,13 @@ public class QueryManager {
     //Method to get all the schede of an utente.
     public List<Schede> getSchede(final String user) {
         return entityManager.createNativeQuery("SELECT * FROM schede WHERE utente = :utente", Schede.class)
+                .setParameter("utente", user)
+                .getResultList();
+    }
+
+    //Method to get all the diets of a user.
+    public List<Diete> getDiete(final String user) {
+        return entityManager.createNativeQuery("SELECT * FROM diete WHERE utente = :utente", Diete.class)
                 .setParameter("utente", user)
                 .getResultList();
     }
