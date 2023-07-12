@@ -16,6 +16,7 @@ import java.util.List;
 public class HomeController extends Controller {
     static final List<String> GENDERS = List.of("M", "F");
     private Utenti user;
+    private final MainController mainController = new FXMLLoader(getClass().getResource("/pages/MainView.fxml")).getController();
     @FXML
     private TextField nameField;
     @FXML
@@ -47,22 +48,19 @@ public class HomeController extends Controller {
     @FXML
     private TableColumn<Utenti, String> heightColumn;
 
-    @FXML
-    void initialize() {
+    public void initialize() {
         initUsersTable();
         genderField.getItems().setAll(GENDERS);
-        usersTable.getSelectionModel().selectedItemProperty().addListener(e -> {
-            setUser(usersTable.getSelectionModel().getSelectedItem());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/ProfileView.fxml"));
-            try {
-                Parent root = loader.load();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            ProfileController controller = loader.getController();
-            controller.setUser(usersTable.getSelectionModel().getSelectedItem());
-            //controller.setUserInfo(usersTable.getSelectionModel().getSelectedItem());
-        });
+        usersTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, utenti, t1) -> {
+            this.mainController.setUser(t1);
+        }));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/MainView.fxml"));
+        try {
+            Parent root = loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        this.mainController = loader.getController();*/
     }
 
     @FXML

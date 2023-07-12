@@ -3,11 +3,71 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
   <tabs>
       <Tab text="Home">
         <content>
-            <fx:include source="HomeView.fxml" />
+            <AnchorPane>
+                <children>
+                    <BorderPane fx:id="homeBPane" layoutX="212.0" layoutY="77.0" prefHeight="474.4" prefWidth="734.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <left>
+                            <VBox alignment="BASELINE_LEFT" prefHeight="474.0" prefWidth="178.0" spacing="10.0" style="-fx-background-color: #d6d4d4;" BorderPane.alignment="CENTER">
+                                <children>
+                                    <Label text="Nome:" />
+                                    <TextField fx:id="nameField" />
+                                    <Label text="Cognome:" />
+                                    <TextField fx:id="surnameField" />
+                                    <Label text="Email:" />
+                                    <TextField fx:id="emailField" />
+                                    <Label text="Sesso:" />
+                                    <ChoiceBox fx:id="genderField" prefHeight="26.0" prefWidth="188.0" />
+                                    <Label text="Altezza:" />
+                                    <TextField fx:id="heightField" />
+                                    <Label text="Data di nascita:" />
+                                    <DatePicker fx:id="birthField" />
+                                    <Label text="Username:" />
+                                    <TextField fx:id="usernameField" />
+                                    <Button mnemonicParsing="false" onAction="#addUser" prefHeight="26.0" prefWidth="90.0" text="Add user">
+                                        <VBox.margin>
+                                            <Insets left="40.0" />
+                                        </VBox.margin>
+                                    </Button>
+                                </children>
+                                <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                </padding>
+                            </VBox>
+                        </left>
+                        <center>
+                            <TableView fx:id="usersTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                <columns>
+                                    <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
+                                    <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Nome" />
+                                    <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="Cognome" />
+                                    <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                                    <TableColumn fx:id="heightColumn" prefWidth="75.0" text="Altezza" />
+                                    <TableColumn fx:id="genderColumn" prefWidth="75.0" text="Sesso" />
+                                    <TableColumn fx:id="birthColumn" prefWidth="99.19998168945312" text="Data di nascita" />
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                        </center>
+                    </BorderPane>
+                </children>
+            </AnchorPane>
         </content>
       </Tab>
     <Tab text="Profile">
