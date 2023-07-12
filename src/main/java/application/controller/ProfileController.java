@@ -46,7 +46,7 @@ public class ProfileController extends MainController {
     private Label birthLabel;
 
     @FXML
-    void initialize() {
+    public void initialize() {
         System.out.println(getQueryManager().getAllenamenti("EduardT"));
         this.measuresBox.getItems().setAll(MEASURE_UNITS);
         this.measuresBox.setValue(MEASURE_UNITS.stream().filter(e -> e.equals("Kg")).findAny().get());

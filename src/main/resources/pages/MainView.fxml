@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="894.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
   <tabs>
       <Tab text="Home">
         <content>
-            <fx:include source="HomeView.fxml"></fx:include>
+            <fx:include source="HomeView.fxml" />
         </content>
       </Tab>
     <Tab text="Profile">
       <content>
-          <fx:include source="ProfileView.fxml"></fx:include>
+          <fx:include source="ProfileView.fxml" />
       </content>
     </Tab>
       <Tab text="Schede">
         <content>
-          <fx:include source="SchedeView.fxml"/>
+          <fx:include source="SchedeView.fxml" />
         </content>
       </Tab>
     <Tab text="Diete">
       <content>
-        <fx:include source="DietsView.fxml"/>
+        <fx:include source="DietsView.fxml" />
       </content>
     </Tab>
       <Tab text="Ricette">
           <content>
-             <fx:include source="RecipeesView.fxml"/>
+             <fx:include source="RecipeesView.fxml" />
           </content>
       </Tab>
   </tabs>
