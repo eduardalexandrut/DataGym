@@ -4,12 +4,9 @@ import entity.Utenti;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,32 +57,8 @@ public class MainController extends Controller {
         initUsersTable();
         genderField.getItems().setAll(GENDERS);
         usersTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, utenti, t1) -> {
-            setUser(t1);
-            System.out.println(getUser().toString());
+            setUser(Optional.ofNullable(t1));
         }));
-        tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, tab, t1) -> {
-            switch (t1.getText()) {
-                case "Home":
-                    System.out.println(user);
-                    break;
-                case "Profile":
-                    System.out.println("profiel");
-                    //this.profileController.setUsername(user);
-                    break;
-                case "Schede":
-                    System.out.println("schede");
-                    break;
-                case "Diete":
-                    System.out.println("diete");
-                    break;
-                case "Ricette":
-                    System.out.println("Ricette");
-                    break;
-                default:
-                    System.out.println(getUser().toString());
-                    break;
-            }
-        });
     }
 
     @FXML
@@ -107,11 +80,12 @@ public class MainController extends Controller {
         ObservableList<Utenti> users = FXCollections.observableArrayList(getQueryManager().getAllUsers());
         usersTable.setItems(users);
     }
-    public Utenti getUser() {
-        return this.user.get();
+    public Optional<Utenti> getUser() {
+        return this.user;
     }
-    public void setUser(final Utenti user) {
-        this.user = Optional.of(user);
-        this.profileController.setUsername(Optional.of(user));
+    public void setUser(final Optional<Utenti> user) {
+        this.user = user;
+        this.profileController.setUser(user);
+        this.profileController.setUserInfo(user);
     }
 }

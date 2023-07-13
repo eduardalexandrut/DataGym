@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class HomeController extends Controller {
     static final List<String> GENDERS = List.of("M", "F");
@@ -52,7 +53,7 @@ public class HomeController extends Controller {
         initUsersTable();
         genderField.getItems().setAll(GENDERS);
         usersTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, utenti, t1) -> {
-            this.mainController.setUser(t1);
+            this.mainController.setUser(Optional.of(t1));
         }));
     }
 

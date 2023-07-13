@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="407.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ProfileController">
@@ -21,15 +22,7 @@
                 <center>
                     <TabPane prefHeight="400.0" prefWidth="384.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                         <tabs>
-                  <Tab text="Dettagli">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="username" layoutX="264.0" layoutY="79.0" text="Label" />
-                           </children></AnchorPane>
-                    </content>
-                  </Tab>
-                            <Tab text="Pesi">
+                            <Tab text="Details">
                                 <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                         <children>
@@ -41,7 +34,7 @@
                                                             <TextField fx:id="weightField" prefHeight="26.0" prefWidth="166.0" />
                                                             <Label text="Unità di misura:" />
                                                             <ChoiceBox fx:id="measuresBox" prefHeight="26.0" prefWidth="172.0" />
-                                                            <Label text="Data" />
+                                                            <Label text="Data:" />
                                                             <DatePicker fx:id="dataField" />
                                                             <Button mnemonicParsing="false" text="Add +" />
                                                         </children>
@@ -60,6 +53,21 @@
                                                         </yAxis>
                                                     </ScatterChart>
                                                 </center>
+                                 <top>
+                                    <HBox prefHeight="52.0" prefWidth="632.0" spacing="30.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label fx:id="usernameLabel" text="Username:" />
+                                          <Label fx:id="nameLabel" text="Nome:" />
+                                          <Label fx:id="surnameLabel" text="Cognome:" />
+                                          <Label fx:id="genderLabel" text="Sesso:" />
+                                          <Label fx:id="heightLabel" text="Altezza:" />
+                                          <Label fx:id="birthLabel" text="Data di nascita:" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </top>
                                             </BorderPane>
                                         </children>
                                     </AnchorPane>
