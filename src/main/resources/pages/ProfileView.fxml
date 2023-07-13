@@ -35,8 +35,8 @@
                                                             <Label text="Unità di misura:" />
                                                             <ChoiceBox fx:id="measuresBox" prefHeight="26.0" prefWidth="172.0" />
                                                             <Label text="Data:" />
-                                                            <DatePicker fx:id="dataField" />
-                                                            <Button mnemonicParsing="false" text="Add +" />
+                                                            <DatePicker fx:id="dateField" />
+                                                            <Button mnemonicParsing="false" onAction="#addUserWeight" text="Add +" />
                                                         </children>
                                                         <padding>
                                                             <Insets left="10.0" right="10.0" top="10.0" />

@@ -75,7 +75,7 @@ public class QueryManager {
     }
 
     //Method to add a new weight to a specific user.
-    public void addWeight(final PesiUtenti userWeight) {
+    public void addUserWeight(final PesiUtenti userWeight) {
         transaction.begin();
         entityManager.createNativeQuery("INSERT INTO pesi_utenti(valore, unitàMisura, data, utente) " +
                 "VALUES (:valore, :unitàMisura, :data, :utente)", PesiUtenti.class)

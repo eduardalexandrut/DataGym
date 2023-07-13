@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class ProfileController extends MainController {
     @FXML
     private TextField weightField;
     @FXML
-    private DatePicker dataField;
+    private DatePicker dateField;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -49,6 +50,12 @@ public class ProfileController extends MainController {
     public void initialize() {
         this.measuresBox.getItems().setAll(MEASURE_UNITS);
         this.measuresBox.setValue(MEASURE_UNITS.stream().filter(e -> e.equals("Kg")).findAny().get());
+        this.dateField.setValue(LocalDate.now());
+
+    }
+
+    @FXML
+    public void addUserWeight() {
 
     }
     @Override
