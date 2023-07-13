@@ -93,6 +93,6 @@ public class MainController extends Controller {
     public void setUser(final Optional<Utenti> user) {
         this.user = user;
         this.profileController.setUser(user);
-        this.profileController.setUserInfo(user);
+        //this.profileController.setUserInfo(user);
     }
 }

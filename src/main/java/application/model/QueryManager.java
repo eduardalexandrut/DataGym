@@ -80,4 +80,11 @@ public class QueryManager {
                 .executeUpdate();
         transaction.commit();
     }
+
+    //Method to get all the weights of a user.
+    public List<PesiUtenti> getUserWeights(final Utenti user) {
+        return entityManager.createNativeQuery("SELECT * FROM pesi_utenti WHERE utente = :user", PesiUtenti.class)
+                .setParameter("user", user.getUsername())
+                .getResultList();
+    }
 }

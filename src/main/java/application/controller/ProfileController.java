@@ -3,8 +3,7 @@ package application.controller;
 import entity.PesiUtenti;
 import entity.Utenti;
 import javafx.fxml.FXML;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.*;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,17 +14,17 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProfileController extends MainController {
     static final List<String> MEASURE_UNITS = List.of("Kg", "Lbs");
     private Optional<Utenti> user = Optional.empty();
-    //Profile fx elements.
-   /* @FXML
-    private LineChart<String, String> LineChart;*/
     @FXML
+    private LineChart<Date, BigDecimal> weightChart;
+    /*@FXML
     private CategoryAxis x;
     @FXML
-    private NumberAxis y;
+    private NumberAxis y;*/
     @FXML
     private ChoiceBox<String> measuresBox;
     @FXML
@@ -76,6 +75,8 @@ public class ProfileController extends MainController {
     @Override
     public void setUser(final Optional<Utenti> user) {
         this.user = user;
+        setUserInfo(user);
+        initWeightChart();
     }
 
     public void setUserInfo(final Optional<Utenti> user) {
@@ -87,5 +88,13 @@ public class ProfileController extends MainController {
             genderLabel.setText("Sesso:" + "\n" + getUser().get().getSesso());
             birthLabel.setText("Data di nascita:" + "\n" + getUser().get().getDataNascita().toString());
         }
+    }
+    private void initWeightChart() {
+        XYChart.Series series = new XYChart.Series();
+        series.getData().setAll(getQueryManager().getUserWeights(this.user.get())
+                        .stream()
+                        .map(e -> new XYChart.Data<>(e.getData().toString(), e.getValore()))
+                        .collect(Collectors.toList()));
+        weightChart.getData().add(series);
     }
 }
