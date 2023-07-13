@@ -72,22 +72,22 @@
       </Tab>
     <Tab text="Profile">
       <content>
-          <fx:include source="ProfileView.fxml" />
+          <fx:include source="ProfileView.fxml" fx:id="profile"/>
       </content>
     </Tab>
       <Tab text="Schede">
         <content>
-          <fx:include source="SchedeView.fxml" />
+          <fx:include source="SchedeView.fxml" fx:id="schede"/>
         </content>
       </Tab>
     <Tab text="Diete">
       <content>
-        <fx:include source="DietsView.fxml" />
+        <fx:include source="DietsView.fxml" fx:id="diets"/>
       </content>
     </Tab>
       <Tab text="Ricette">
           <content>
-             <fx:include source="RecipeesView.fxml" />
+             <fx:include source="RecipeesView.fxml" fx:id="recipes"/>
           </content>
       </Tab>
   </tabs>

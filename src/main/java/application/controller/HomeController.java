@@ -54,13 +54,6 @@ public class HomeController extends Controller {
         usersTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, utenti, t1) -> {
             this.mainController.setUser(t1);
         }));
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/pages/MainView.fxml"));
-        try {
-            Parent root = loader.load();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        this.mainController = loader.getController();*/
     }
 
     @FXML

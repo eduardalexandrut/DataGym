@@ -47,6 +47,13 @@ public class MainController extends Controller {
     private TableColumn birthColumn;
     @FXML
     private TableColumn<Utenti, String> heightColumn;
+    @FXML
+    private ProfileController profileController;
+    @FXML
+    private SchedeController schedeController;
+    @FXML
+    private DietsController dietsController;
+    @FXML RecipesController recipesController;
 
     public void initialize() {
         initUsersTable();
@@ -62,6 +69,7 @@ public class MainController extends Controller {
                     break;
                 case "Profile":
                     System.out.println("profiel");
+                    this.profileController.setUsername(user);
                     break;
                 case "Schede":
                     System.out.println("schede");

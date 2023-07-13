@@ -44,6 +44,8 @@ public class ProfileController extends MainController {
     private Label genderLabel;
     @FXML
     private Label birthLabel;
+    @FXML
+    private Label username;
 
     @FXML
     public void initialize() {
@@ -70,5 +72,9 @@ public class ProfileController extends MainController {
         genderLabel.setText(genderLabel.getText() + "\t" + getUser().getSesso());
         emailLabel.setText(emailLabel.getText() + "\t" + getUser().getEmail());
         birthLabel.setText(birthLabel.getText() + "\t" + getUser().getDataNascita());*/
+    }
+
+    public void setUsername(final Utenti user) {
+        this.username.setText(user.getUsername());
     }
 }
