@@ -61,10 +61,11 @@ public class ProfileController extends MainController {
         if (this.user.isPresent()) {
             final PesiUtenti userWeight = new PesiUtenti();
             userWeight.setUtente(this.user.get().getUsername());
-            userWeight.setData(Date.valueOf(LocalDate.now()));
+            userWeight.setData(Date.valueOf(this.dateField.getValue()));
             userWeight.setUnitàMisura(this.measuresBox.getValue());
             userWeight.setValore(BigDecimal.valueOf(Double.parseDouble(this.weightField.getText())));
             getQueryManager().addUserWeight(userWeight);
+            initWeightChart();
         }
     }
     @Override
@@ -95,6 +96,6 @@ public class ProfileController extends MainController {
                         .stream()
                         .map(e -> new XYChart.Data<>(e.getData().toString(), e.getValore()))
                         .collect(Collectors.toList()));
-        weightChart.getData().add(series);
+        weightChart.getData().setAll(series);
     }
 }
