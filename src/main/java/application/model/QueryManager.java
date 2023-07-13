@@ -1,9 +1,6 @@
 package application.model;
 
-import entity.Allenamenti;
-import entity.Diete;
-import entity.Schede;
-import entity.Utenti;
+import entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -75,5 +72,18 @@ public class QueryManager {
         return entityManager.createNativeQuery("SELECT * FROM diete WHERE utente = :utente", Diete.class)
                 .setParameter("utente", user)
                 .getResultList();
+    }
+
+    //Method to add a new weight to a specific user.
+    public void addWeight(final PesiUtenti userWeight) {
+        transaction.begin();
+        entityManager.createNativeQuery("INSERT INTO pesi_utenti(valore, unitàMisura, data, utente) " +
+                "VALUES (:valore, :unitàMisura, :data, :utente)", PesiUtenti.class)
+                .setParameter("valore", userWeight.getValore())
+                .setParameter("unitàMisura", userWeight.getUnitàMisura())
+                .setParameter("data", userWeight.getData())
+                .setParameter("utente", userWeight.getUtente())
+                .executeUpdate();
+        transaction.commit();
     }
 }

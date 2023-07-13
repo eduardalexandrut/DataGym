@@ -57,7 +57,7 @@ public class MainController extends Controller {
         initUsersTable();
         genderField.getItems().setAll(GENDERS);
         usersTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, utenti, t1) -> {
-            setUser(Optional.ofNullable(t1));
+            setUser(Optional.of(t1));
         }));
     }
 
