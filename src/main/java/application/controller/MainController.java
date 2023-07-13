@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,10 +65,15 @@ public class MainController extends Controller {
 
     @FXML
     public void addUser() {
-        getQueryManager().addUser(usernameField.getText(), nameField.getText(), surnameField.getText(), emailField.getText(),
-                birthField.getValue(),
-                genderField.getValue(),
-                heightField.getText());
+        final Utenti newUser = new Utenti();
+        newUser.setUsername(usernameField.getText());
+        newUser.setNome(nameField.getText());
+        newUser.setCognome(surnameField.getText());
+        newUser.setSesso(genderField.getValue());
+        newUser.setEmail(emailField.getText());
+        newUser.setAltezza(BigDecimal.valueOf(Double.parseDouble(heightField.getText())));
+        newUser.setDataNascita(Date.valueOf(birthField.getValue()));
+        getQueryManager().addUser(newUser);
         initUsersTable();
     }
     private void initUsersTable() {

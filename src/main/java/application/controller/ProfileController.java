@@ -1,5 +1,6 @@
 package application.controller;
 
+import entity.PesiUtenti;
 import entity.Utenti;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -9,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +59,12 @@ public class ProfileController extends MainController {
 
     @FXML
     public void addUserWeight() {
-
+        final PesiUtenti userWeight = new PesiUtenti();
+        userWeight.setUtente(this.user.get().toString());
+        userWeight.setData(Date.valueOf(this.dateField.getValue()));
+        userWeight.setUnitàMisura(this.measuresBox.getValue());
+        userWeight.setValore(BigDecimal.valueOf(Double.parseDouble(this.weightField.getText())));
+        getQueryManager().addUserWeight(userWeight);
     }
     @Override
     public Optional<Utenti> getUser() {

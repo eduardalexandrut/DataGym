@@ -21,23 +21,17 @@ public class QueryManager {
     }
 
     //Method to add a new user.
-    public void addUser(final String username,
-                        final String name,
-                        final String surname,
-                        final String email,
-                        final LocalDate birth,
-                        final String gender,
-                        final String height) {
+    public void addUser(final Utenti user) {
         transaction.begin();
         entityManager.createNativeQuery("INSERT INTO Utenti (username, email, nome, cognome, altezza, sesso, dataNascita)" +
                 "VALUES (:username, :email, :nome, :cognome, :altezza, :sesso, :data_nascita)")
-                .setParameter("username", username)
-                .setParameter("email", email)
-                .setParameter("nome", name)
-                .setParameter("cognome", surname)
-                .setParameter("altezza", height)
-                .setParameter("sesso", gender)
-                .setParameter("dataNascita", birth).executeUpdate();
+                .setParameter("username", user.getUsername())
+                .setParameter("email", user.getEmail())
+                .setParameter("nome", user.getNome())
+                .setParameter("cognome", user.getCognome())
+                .setParameter("altezza", user.getAltezza())
+                .setParameter("sesso", user.getSesso())
+                .setParameter("data_nascita", user.getDataNascita()).executeUpdate();
         transaction.commit();
     }
 
