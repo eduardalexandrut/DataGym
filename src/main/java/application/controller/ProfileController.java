@@ -60,8 +60,8 @@ public class ProfileController extends MainController {
     @FXML
     public void addUserWeight() {
         final PesiUtenti userWeight = new PesiUtenti();
-        userWeight.setUtente(this.user.get().toString());
-        userWeight.setData(Date.valueOf(this.dateField.getValue()));
+        userWeight.setUtente(this.user.get().getUsername());
+        userWeight.setData(Date.valueOf(LocalDate.now()));
         userWeight.setUnitàMisura(this.measuresBox.getValue());
         userWeight.setValore(BigDecimal.valueOf(Double.parseDouble(this.weightField.getText())));
         getQueryManager().addUserWeight(userWeight);
