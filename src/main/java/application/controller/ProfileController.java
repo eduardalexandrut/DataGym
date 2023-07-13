@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProfileController extends MainController {
     static final List<String> MEASURE_UNITS = List.of("Kg", "Lbs");
@@ -74,7 +75,11 @@ public class ProfileController extends MainController {
         birthLabel.setText(birthLabel.getText() + "\t" + getUser().getDataNascita());*/
     }
 
-    public void setUsername(final Utenti user) {
-        this.username.setText(user.getUsername());
+    public void setUsername(final Optional<Utenti> user) {
+        if(user.isPresent()) {
+            this.username.setText(user.get().getUsername());
+        }else {
+            this.username.setText("No user selected");
+        }
     }
 }

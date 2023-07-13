@@ -11,10 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class MainController extends Controller {
     static final List<String> GENDERS = List.of("M", "F");
-    private Utenti user;
+    private Optional<Utenti> user = Optional.empty();
     @FXML
     private TabPane tabPane;
     @FXML
@@ -69,7 +70,7 @@ public class MainController extends Controller {
                     break;
                 case "Profile":
                     System.out.println("profiel");
-                    this.profileController.setUsername(user);
+                    //this.profileController.setUsername(user);
                     break;
                 case "Schede":
                     System.out.println("schede");
@@ -107,9 +108,10 @@ public class MainController extends Controller {
         usersTable.setItems(users);
     }
     public Utenti getUser() {
-        return this.user;
+        return this.user.get();
     }
     public void setUser(final Utenti user) {
-        this.user = user;
+        this.user = Optional.of(user);
+        this.profileController.setUsername(Optional.of(user));
     }
 }
