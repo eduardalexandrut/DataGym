@@ -75,7 +75,7 @@ public class SchedeController extends Controller {
     }
 
     @FXML
-    public void addTraining() {
+    public void addAllenamento() {
 
     }
     public void initSchedeTable() {

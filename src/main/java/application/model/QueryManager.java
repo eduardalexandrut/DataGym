@@ -42,6 +42,21 @@ public class QueryManager {
                 .getResultList();
     }
 
+    //Method to add an allenamento to the db.
+    public void addAllenamento(final Allenamenti allenamento) {
+        transaction.begin();
+        entityManager.createNativeQuery("INSERT INTO allenamenti (oraInizio, oraFine, data, utente, scheda, commento) " +
+                "VALUES (:oraInizio, :oraFine, :data, :utente, :scheda, :commento)", Allenamenti.class)
+                .setParameter("oraInizio", allenamento.getOraInizio())
+                .setParameter("oraFine", allenamento.getOraFine())
+                .setParameter("data", allenamento.getData())
+                .setParameter("utente", allenamento.getUtente())
+                .setParameter("scheda", allenamento.getScheda())
+                .setParameter("commento", allenamento.getCommento())
+                .executeUpdate();
+        transaction.commit();
+    }
+
     //Method to add a new scheda into the db.
     public void addScheda(final String name, final String user, final LocalDate dataCreazione) {
         transaction.begin();
