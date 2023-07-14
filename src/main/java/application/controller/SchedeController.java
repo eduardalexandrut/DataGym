@@ -2,6 +2,7 @@ package application.controller;
 
 import entity.Allenamenti;
 import entity.Schede;
+import entity.Utenti;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,10 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class SchedeController extends Controller {
     private Schede scheda;
+    private Optional<Utenti> user = Optional.empty();
 
     @FXML
     private TextField schedaName;
@@ -26,7 +29,6 @@ public class SchedeController extends Controller {
     private TableColumn schedaNameCol;
     @FXML
     private TableColumn createdCol;
-
     @FXML
     private TableView allenamentiTable;
     @FXML
@@ -44,15 +46,17 @@ public class SchedeController extends Controller {
 
     @FXML
     void initialize() {
-        initSchedeTable();
-        initSchedaAllenamenti();
-        schedeChoiceBox.getItems().setAll(getQueryManager().getSchede("EduardT")
-                .stream()
-                .map(e -> e.getNomeScheda())
-                .collect(Collectors.toList()));
-        schedeTable.getSelectionModel()
-                .selectedItemProperty()
-                .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
+        if(getUser().isPresent()) {
+            initSchedeTable();
+            initSchedaAllenamenti();
+            schedeChoiceBox.getItems().setAll(getQueryManager().getSchede(getUser().get().getUsername())
+                    .stream()
+                    .map(e -> e.getNomeScheda())
+                    .collect(Collectors.toList()));
+            schedeTable.getSelectionModel()
+                    .selectedItemProperty()
+                    .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
+        }
     }
     @FXML
     public void addScheda() {
@@ -63,7 +67,7 @@ public class SchedeController extends Controller {
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
         createdCol.setCellValueFactory(new PropertyValueFactory<>("dataCreazione"));
-        ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede("EduardT"));
+        ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede(getUser().get().getUsername()));
         schedeTable.setItems(schede);
     }
 
@@ -73,7 +77,8 @@ public class SchedeController extends Controller {
         startCol.setCellValueFactory(new PropertyValueFactory<>("oraInizio"));
         endCol.setCellValueFactory(new PropertyValueFactory<Allenamenti, Time>("oraFine"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("commento"));
-        ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti("EduardT"));
+        final String userName = getUser().get().getUsername();
+        ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti(userName));
         allenamentiTable.setItems(allenamenti);
     }
 
@@ -83,5 +88,13 @@ public class SchedeController extends Controller {
 
     public Schede getScheda() {
         return this.scheda;
+    }
+    public Optional<Utenti> getUser() {
+        return user;
+    }
+
+    public void setUser(final Optional<Utenti> user) {
+        this.user = user;
+        initialize();
     }
 }
