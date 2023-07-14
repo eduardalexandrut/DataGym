@@ -6,11 +6,9 @@ import entity.Utenti;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 
 import java.sql.Time;
 import java.time.LocalDate;
@@ -18,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class SchedeController extends Controller {
-    private Schede scheda;
+    private Optional<Schede> scheda = Optional.empty();
     private Optional<Utenti> user = Optional.empty();
 
     @FXML
@@ -43,12 +41,11 @@ public class SchedeController extends Controller {
     private TableColumn commentCol;
     @FXML
     private ChoiceBox schedeChoiceBox;
-
+    @FXML
+    private BorderPane schedeDetailsBorder;
     @FXML
     void initialize() {
         if(getUser().isPresent()) {
-            initSchedeTable();
-            initSchedaAllenamenti();
             schedeChoiceBox.getItems().setAll(getQueryManager().getSchede(getUser().get().getUsername())
                     .stream()
                     .map(e -> e.getNomeScheda())
@@ -57,6 +54,9 @@ public class SchedeController extends Controller {
                     .selectedItemProperty()
                     .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
         }
+        initSchedaAllenamenti();
+        initSchedeTable();
+        initSchedaDetails();
     }
     @FXML
     public void addScheda() {
@@ -69,8 +69,10 @@ public class SchedeController extends Controller {
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
         createdCol.setCellValueFactory(new PropertyValueFactory<>("dataCreazione"));
-        ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede(getUser().get().getUsername()));
-        schedeTable.setItems(schede);
+        if (getUser().isPresent()) {
+            ObservableList<Schede> schede = FXCollections.observableArrayList(getQueryManager().getSchede(getUser().get().getUsername()));
+            schedeTable.setItems(schede);
+        }
     }
 
     public void initSchedaAllenamenti() {
@@ -79,16 +81,27 @@ public class SchedeController extends Controller {
         startCol.setCellValueFactory(new PropertyValueFactory<>("oraInizio"));
         endCol.setCellValueFactory(new PropertyValueFactory<Allenamenti, Time>("oraFine"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("commento"));
-        final String userName = getUser().get().getUsername();
-        ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti(userName));
-        allenamentiTable.setItems(allenamenti);
+        if (getUser().isPresent()) {
+            final String userName = getUser().get().getUsername();
+            ObservableList<Allenamenti> allenamenti =  FXCollections.observableArrayList(getQueryManager().getAllenamenti(userName));
+            allenamentiTable.setItems(allenamenti);
+        }
+    }
+
+    public void initSchedaDetails() {
+        if(getScheda().isEmpty()) {
+            this.schedeDetailsBorder.setCenter(new Label("Nessuna scheda selezionata."));
+        }else {
+            System.out.println("ciao");
+        }
     }
 
     public void setScheda(final Schede scheda) {
-        this.scheda = scheda;
+        this.scheda = Optional.of(scheda);
+        initSchedaDetails();
     }
 
-    public Schede getScheda() {
+    public Optional<Schede> getScheda() {
         return this.scheda;
     }
     public Optional<Utenti> getUser() {
