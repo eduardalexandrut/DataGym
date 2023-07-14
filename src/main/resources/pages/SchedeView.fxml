@@ -92,12 +92,12 @@
                                                 <Label text="Scheda:" />
                                                 <ChoiceBox fx:id="schedeChoiceBox" prefWidth="150.0" />
                                                 <Label text="Start:" />
-                                                <TextField />
+                                                <TextField fx:id="startField" />
                                                 <Label text="End:" />
-                                                <TextField />
+                                                <TextField fx:id="endField" />
                                                 <Label text="Comment:" />
-                                                <TextArea prefHeight="66.0" prefWidth="122.0" />
-                                                <Button mnemonicParsing="false" text="Add+" />
+                                                <TextArea fx:id="commentField" prefHeight="66.0" prefWidth="122.0" />
+                                                <Button fx:id="addTraining" mnemonicParsing="false" text="Add+" />
                                              </children>
                                              <padding>
                                                 <Insets left="10.0" right="10.0" top="10.0" />

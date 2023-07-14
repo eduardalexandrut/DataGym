@@ -43,7 +43,15 @@ public class SchedeController extends Controller {
     private ChoiceBox schedeChoiceBox;
     @FXML
     private BorderPane schedeDetailsBorder;
+
+    //Allenamenti section.
     @FXML
+    private TextArea commentField;
+    @FXML
+    private TextField startField;
+    @FXML
+    private TextField endField;
+
     void initialize() {
         if(getUser().isPresent()) {
             schedeChoiceBox.getItems().setAll(getQueryManager().getSchede(getUser().get().getUsername())
@@ -66,6 +74,10 @@ public class SchedeController extends Controller {
         }
     }
 
+    @FXML
+    public void addTraining() {
+
+    }
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
         createdCol.setCellValueFactory(new PropertyValueFactory<>("dataCreazione"));
