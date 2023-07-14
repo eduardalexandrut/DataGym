@@ -81,12 +81,17 @@ public class SchedeController extends Controller {
     @FXML
     public void addAllenamento() {
         if (getUser().isPresent()) {
+            final int codiceScheda = getQueryManager().getSchede(getUser().get().getUsername()).stream()
+                    .filter(e -> e.getNomeScheda() == schedeChoiceBox.getValue())
+                    .findAny()
+                    .get()
+                    .getCodiceScheda();
             Allenamenti allenamento = new Allenamenti();
             allenamento.setData(java.sql.Date.valueOf(LocalDate.now()));
             allenamento.setCommento(this.commentField.getText());
             allenamento.setOraInizio(convertStrToTime(this.startField.getText()));
             allenamento.setOraFine(convertStrToTime(this.endField.getText()));
-            allenamento.setScheda(1);
+            allenamento.setScheda(codiceScheda);
             allenamento.setUtente(getUser().get().getUsername());
             getQueryManager().addAllenamento(allenamento);
             initSchedaAllenamenti();
@@ -118,7 +123,7 @@ public class SchedeController extends Controller {
         if(getScheda().isEmpty()) {
             this.schedeDetailsBorder.setCenter(new Label("Nessuna scheda selezionata."));
         }else {
-            System.out.println("ciao");
+            this.schedeDetailsBorder.setCenter(new Label(getScheda().get().getNomeScheda()));
         }
     }
 
