@@ -76,7 +76,9 @@ public class SchedeController extends Controller {
 
     @FXML
     public void addAllenamento() {
+        if (getUser().isPresent()) {
 
+        }
     }
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
