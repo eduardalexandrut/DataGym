@@ -11,7 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -77,7 +81,15 @@ public class SchedeController extends Controller {
     @FXML
     public void addAllenamento() {
         if (getUser().isPresent()) {
-
+            Allenamenti allenamento = new Allenamenti();
+            allenamento.setData(java.sql.Date.valueOf(LocalDate.now()));
+            allenamento.setCommento(this.commentField.getText());
+            allenamento.setOraInizio(convertStrToTime(this.startField.getText()));
+            allenamento.setOraFine(convertStrToTime(this.endField.getText()));
+            allenamento.setScheda(1);
+            allenamento.setUtente(getUser().get().getUsername());
+            getQueryManager().addAllenamento(allenamento);
+            initSchedaAllenamenti();
         }
     }
     public void initSchedeTable() {
@@ -121,9 +133,19 @@ public class SchedeController extends Controller {
     public Optional<Utenti> getUser() {
         return user;
     }
-
     public void setUser(final Optional<Utenti> user) {
         this.user = user;
         initialize();
+    }
+    private Time convertStrToTime(final String s)  {
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        Date date = null;
+        try {
+            date = dateFormat.parse(s);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Time time = new Time(date.getTime());
+        return time;
     }
 }
