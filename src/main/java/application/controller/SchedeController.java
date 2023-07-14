@@ -60,8 +60,10 @@ public class SchedeController extends Controller {
     }
     @FXML
     public void addScheda() {
-        super.getQueryManager().addScheda(schedaName.getText(), "EduardT", LocalDate.now());
-        initSchedeTable();
+        if (getUser().isPresent()) {
+            super.getQueryManager().addScheda(schedaName.getText(), getUser().get().getUsername(), LocalDate.now());
+            initSchedeTable();
+        }
     }
 
     public void initSchedeTable() {
