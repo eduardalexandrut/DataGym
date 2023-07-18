@@ -1,9 +1,6 @@
 package application.controller;
 
-import entity.Allenamenti;
-import entity.Esercizi;
-import entity.Schede;
-import entity.Utenti;
+import entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,6 +28,13 @@ public class SchedeController extends Controller {
     private TableView<Schede> schedeTable;
     @FXML
     private TableColumn schedaNameCol;
+
+    //Details section.
+    @FXML
+    private TableView<Esercizi> eserciziTable;
+    private TableView<Serie> setTable;
+
+    //Allenamenti section.
     @FXML
     private TableColumn createdCol;
     @FXML
@@ -49,8 +53,6 @@ public class SchedeController extends Controller {
     private ChoiceBox schedeChoiceBox;
     @FXML
     private BorderPane schedeDetailsBorder;
-
-    //Allenamenti section.
     @FXML
     private TextArea commentField;
     @FXML
