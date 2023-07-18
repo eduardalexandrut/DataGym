@@ -82,6 +82,12 @@ public class QueryManager {
                 .getResultList();
     }
 
+    public List<Serie> getSerieOfEsercizio(final int esercizio) {
+        return entityManager.createNativeQuery("SELECT * FROM serie WHERE esercizio = :esercizio")
+                .setParameter("esercizio", esercizio)
+                .getResultList();
+    }
+
     //Method to get all the diets of a user.
     public List<Diete> getDiete(final String user) {
         return entityManager.createNativeQuery("SELECT * FROM diete WHERE utente = :utente", Diete.class)
