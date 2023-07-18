@@ -74,4 +74,14 @@ public class Esercizi {
         result = 31 * result + scheda;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Esercizi{" +
+                "codiceEsercizio=" + codiceEsercizio +
+                ", nomeEsercizio='" + nomeEsercizio + '\'' +
+                ", tipo=" + tipo +
+                ", scheda=" + scheda +
+                '}';
+    }
 }

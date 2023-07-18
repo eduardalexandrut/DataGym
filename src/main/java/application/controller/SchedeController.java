@@ -1,6 +1,7 @@
 package application.controller;
 
 import entity.Allenamenti;
+import entity.Esercizi;
 import entity.Schede;
 import entity.Utenti;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class SchedeController extends Controller {
     private Optional<Schede> scheda = Optional.empty();
     private Optional<Utenti> user = Optional.empty();
+    private Optional<Esercizi> esercizio = Optional.empty();
 
     @FXML
     private TextField schedaName;
