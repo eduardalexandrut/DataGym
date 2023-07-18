@@ -32,7 +32,22 @@ public class SchedeController extends Controller {
     //Details section.
     @FXML
     private TableView<Esercizi> eserciziTable;
+    @FXML
     private TableView<Serie> setTable;
+    @FXML
+    private TableColumn codiceEsCol;
+    @FXML
+    private TableColumn nomeEsCol;
+    @FXML
+    private TableColumn typeEsCol;
+    @FXML
+    private TableColumn setIdCol;
+    @FXML
+    private TableColumn setRepCol;
+    @FXML
+    private TableColumn setPausaCol;
+    @FXML
+    private TableColumn setDurataCol;
 
     //Allenamenti section.
     @FXML
@@ -70,9 +85,11 @@ public class SchedeController extends Controller {
                     .selectedItemProperty()
                     .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
         }
-        initSchedaAllenamenti();
+        initAllenamentiTable();
         initSchedeTable();
         initSchedaDetails();
+        initEserciziTable();
+        initSetTable();
     }
     @FXML
     public void addScheda() {
@@ -98,7 +115,7 @@ public class SchedeController extends Controller {
             allenamento.setScheda(codiceScheda);
             allenamento.setUtente(getUser().get().getUsername());
             getQueryManager().addAllenamento(allenamento);
-            initSchedaAllenamenti();
+            initAllenamentiTable();
         }
     }
     public void initSchedeTable() {
@@ -110,7 +127,7 @@ public class SchedeController extends Controller {
         }
     }
 
-    public void initSchedaAllenamenti() {
+    public void initAllenamentiTable() {
         dateCol.setCellValueFactory(new PropertyValueFactory<>("data"));
         schedaCol.setCellValueFactory(new PropertyValueFactory<>("scheda"));
         startCol.setCellValueFactory(new PropertyValueFactory<>("oraInizio"));
@@ -122,6 +139,18 @@ public class SchedeController extends Controller {
             allenamentiTable.setItems(allenamenti);
         }
     }
+    public void initEserciziTable() {
+        codiceEsCol.setCellValueFactory(new PropertyValueFactory<>("codiceEsercizio"));
+        nomeEsCol.setCellValueFactory(new PropertyValueFactory<>("nomeEsercizio"));
+        typeEsCol.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+    }
+
+    public void initSetTable() {
+        setIdCol.setCellValueFactory(new PropertyValueFactory<>("indice"));
+        setDurataCol.setCellValueFactory(new PropertyValueFactory<>("durata"));
+        setPausaCol.setCellValueFactory(new PropertyValueFactory<>("pausa"));
+        setRepCol.setCellValueFactory(new PropertyValueFactory<>("numeroRep"));
+    }
 
     public void initSchedaDetails() {
         if(getScheda().isEmpty()) {
@@ -130,6 +159,7 @@ public class SchedeController extends Controller {
             this.schedeDetailsBorder.setCenter(new Label(getScheda().get().getNomeScheda()));
         }
     }
+
 
     public void setScheda(final Schede scheda) {
         this.scheda = Optional.of(scheda);
