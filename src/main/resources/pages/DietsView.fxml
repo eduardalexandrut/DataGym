@@ -33,8 +33,8 @@
                                              <children>
                                                 <TableView fx:id="dietsTable" prefHeight="182.4" prefWidth="456.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <columns>
+                                                      <TableColumn fx:id="dietIdCol" prefWidth="113.5999755859375" text="Codice Dieta" />
                                                       <TableColumn fx:id="nameCol" prefWidth="75.0" text="Nome" />
-                                                      <TableColumn fx:id="createdCol" prefWidth="113.5999755859375" text="Data Creazione" />
                                                    </columns>
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -52,8 +52,8 @@
                                              <children>
                                                 <VBox layoutX="-16.0" layoutY="-9.0" prefHeight="182.4" prefWidth="124.8" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <TextField promptText="Nome Dieta" />
-                                                      <Button mnemonicParsing="false" text="Add Diet" />
+                                                      <TextField fx:id="dietNameField" promptText="Nome Dieta" />
+                                                      <Button mnemonicParsing="false" onAction="#addDiet" text="Add Diet" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" top="10.0" />
@@ -65,8 +65,8 @@
                                              <children>
                                                 <VBox layoutX="12.0" layoutY="-48.0" prefHeight="181.6" prefWidth="124.8" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <DatePicker />
-                                                      <Button mnemonicParsing="false" text="Add Date" />
+                                                      <DatePicker fx:id="dateField" />
+                                                      <Button mnemonicParsing="false" onAction="#addDate" text="Add Date" />
                                                    </children>
                                                    <padding>
                                                       <Insets left="10.0" right="10.0" top="10.0" />

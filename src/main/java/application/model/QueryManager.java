@@ -122,6 +122,18 @@ public class QueryManager {
                 .getResultList();
     }
 
+    //Method to add a new diet.
+    public void addDiet(final Diete diet) {
+        transaction.begin();
+        entityManager.createNativeQuery("INSERT INTO diete(codiceDieta, nomeDieta, utente) " +
+                "VALUES (:codiceDieta, :nomeDieta, :utente)")
+                .setParameter("codiceDieta", diet.getCodiceDieta())
+                .setParameter("nomeDieta", diet.getNomeDieta())
+                .setParameter("utente", diet.getUtente())
+                .executeUpdate();
+        transaction.commit();
+    }
+
     //Method to add a new weight to a specific user.
     public void addUserWeight(final PesiUtenti userWeight) {
         transaction.begin();

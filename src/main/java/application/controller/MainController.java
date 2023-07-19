@@ -94,5 +94,6 @@ public class MainController extends Controller {
         this.user = user;
         this.profileController.setUser(user);
         this.schedeController.setUser(user);
+        this.dietsController.setUser(user);
     }
 }
