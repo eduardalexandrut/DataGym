@@ -4,13 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class Esercizi {
-    enum Tipologie {
-        CALISTHENICS("Calisthenics"), FREEWEIGHT("Free-weight"), CARDIO("Cardio");
-        private String name;
-        Tipologie(final String name) {
-            this.name = name;
-        }
-    }
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "codiceEsercizio")

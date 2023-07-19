@@ -13,11 +13,21 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SchedeController extends Controller {
+    enum Tipologie {
+        CALISTHENICS("Calisthenics"), FREEWEIGHT("Free-weight"), CARDIO("Cardio");
+        private String name;
+        Tipologie(final String name) {
+            this.name = name;
+        }
+    }
     private Optional<Schede> scheda = Optional.empty();
     private Optional<Utenti> user = Optional.empty();
 
@@ -99,6 +109,7 @@ public class SchedeController extends Controller {
                     .selectedItemProperty()
                     .addListener(e -> setEsercizio(eserciziTable.getSelectionModel().getSelectedItem()));
         }
+        exTypeChoice.getItems().setAll(Stream.of(Tipologie.values()).map(e -> e.name).collect(Collectors.toList()));
         initAllenamentiTable();
         initSchedeTable();
         initEserciziTable();
@@ -134,7 +145,14 @@ public class SchedeController extends Controller {
 
     @FXML
     public void addExercise() {
-
+        if (getScheda().isPresent()) {
+            final Esercizi exercise = new Esercizi();
+            exercise.setTipo(exTypeChoice.getValue());
+            exercise.setNomeEsercizio(exNameField.getText());
+            exercise.setScheda(getScheda().get().getCodiceScheda());
+            getQueryManager().addExercise(exercise);
+            initEserciziTable();
+        }
     }
 
     @FXML

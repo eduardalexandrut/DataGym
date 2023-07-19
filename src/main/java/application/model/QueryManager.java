@@ -80,6 +80,18 @@ public class QueryManager {
                 .getResultList();
     }
 
+    public void addExercise(final Esercizi exercise) {
+        transaction.begin();
+        entityManager.createNativeQuery("INSERT INTO esercizi(codiceEsercizio, nomeEsercizio, tipo, scheda) " +
+                "VALUES (:codiceEsercizio, :nomeEsercizio, :tipo, :scheda)")
+                .setParameter("codiceEsercizio", exercise.getCodiceEsercizio())
+                .setParameter("nomeEsercizio", exercise.getNomeEsercizio())
+                .setParameter("tipo", exercise.getTipo())
+                .setParameter("scheda", exercise.getScheda())
+                .executeUpdate();
+        transaction.commit();
+    }
+
     public List<Serie> getSerieOfEsercizio(final int esercizio) {
         return entityManager.createNativeQuery("SELECT * FROM serie WHERE esercizio = :esercizio", Serie.class)
                 .setParameter("esercizio", esercizio)
