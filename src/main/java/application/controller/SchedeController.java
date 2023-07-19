@@ -85,6 +85,9 @@ public class SchedeController extends Controller {
             schedeTable.getSelectionModel()
                     .selectedItemProperty()
                     .addListener( e -> setScheda(schedeTable.getSelectionModel().getSelectedItem()));
+            eserciziTable.getSelectionModel()
+                    .selectedItemProperty()
+                    .addListener(e -> setEsercizio(eserciziTable.getSelectionModel().getSelectedItem()));
         }
         initAllenamentiTable();
         initSchedeTable();
@@ -94,7 +97,7 @@ public class SchedeController extends Controller {
     @FXML
     public void addScheda() {
         if (getUser().isPresent()) {
-            super.getQueryManager().addScheda(schedaName.getText(), getUser().get().getUsername(), LocalDate.now());
+            getQueryManager().addScheda(schedaName.getText(), getUser().get().getUsername(), LocalDate.now());
             initSchedeTable();
         }
     }
@@ -181,8 +184,8 @@ public class SchedeController extends Controller {
         return esercizio;
     }
 
-    public void setEsercizio(Optional<Esercizi> esercizio) {
-        this.esercizio = esercizio;
+    public void setEsercizio(final Esercizi esercizio) {
+        this.esercizio = Optional.of(esercizio);
         initSetTable();
     }
     private Time convertStrToTime(final String s)  {
