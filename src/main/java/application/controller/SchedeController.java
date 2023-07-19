@@ -49,6 +49,16 @@ public class SchedeController extends Controller {
     private TableColumn setPausaCol;
     @FXML
     private TableColumn setDurataCol;
+    @FXML
+    private TextField exNameField;
+    @FXML
+    private ChoiceBox<String> exTypeChoice;
+    @FXML
+    private TextField repField;
+    @FXML
+    private TextField pauseField;
+    @FXML
+    private TextField durationField;
 
     //Allenamenti section.
     @FXML
@@ -120,6 +130,16 @@ public class SchedeController extends Controller {
             getQueryManager().addAllenamento(allenamento);
             initAllenamentiTable();
         }
+    }
+
+    @FXML
+    public void addExercise() {
+
+    }
+
+    @FXML
+    public void addSet() {
+
     }
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));
