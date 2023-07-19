@@ -157,7 +157,16 @@ public class SchedeController extends Controller {
 
     @FXML
     public void addSet() {
-
+        if (getEsercizio().isPresent()) {
+            final Serie set = new Serie();
+            set.setIndice(getQueryManager().getSerieOfEsercizio(getEsercizio().get().getCodiceEsercizio()).size());
+            set.setDurata(Integer.valueOf(durationField.getText()));
+            set.setEsercizio(getEsercizio().get().getCodiceEsercizio());
+            set.setPausa(Integer.parseInt(pauseField.getText()));
+            set.setNumeroRep(Integer.valueOf(repField.getText()));
+            getQueryManager().addSet(set);
+            initSetTable();
+        }
     }
     public void initSchedeTable() {
         schedaNameCol.setCellValueFactory(new PropertyValueFactory<>("nomeScheda"));

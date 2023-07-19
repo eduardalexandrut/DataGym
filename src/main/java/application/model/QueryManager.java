@@ -74,12 +74,14 @@ public class QueryManager {
                 .getResultList();
     }
 
+    //Method to get all the exercises of a scheda.
     public List<Esercizi> getEserciziOfScheda(final int scheda) {
         return entityManager.createNativeQuery("SELECT * FROM esercizi WHERE scheda = :scheda", Esercizi.class)
                 .setParameter("scheda",scheda)
                 .getResultList();
     }
 
+    //Method to add a new exercise.
     public void addExercise(final Esercizi exercise) {
         transaction.begin();
         entityManager.createNativeQuery("INSERT INTO esercizi(codiceEsercizio, nomeEsercizio, tipo, scheda) " +
@@ -92,10 +94,25 @@ public class QueryManager {
         transaction.commit();
     }
 
+    // Method to all the sets of  a specific exercise.
     public List<Serie> getSerieOfEsercizio(final int esercizio) {
         return entityManager.createNativeQuery("SELECT * FROM serie WHERE esercizio = :esercizio", Serie.class)
                 .setParameter("esercizio", esercizio)
                 .getResultList();
+    }
+
+    //Method to add a new set in an exercise.
+    public void addSet(final Serie set) {
+        transaction.begin();
+        entityManager.createNativeQuery("INSERT INTO serie(indice, esercizio, numeroRep, pausa, durata) " +
+                "VALUES (:indice, :esercizio, :numeroRep, :pausa, :durata)")
+                .setParameter("indice", set.getIndice())
+                .setParameter("esercizio", set.getEsercizio())
+                .setParameter("numeroRep", set.getNumeroRep())
+                .setParameter("pausa", set.getPausa())
+                .setParameter("durata", set.getDurata())
+                .executeUpdate();
+        transaction.commit();
     }
 
     //Method to get all the diets of a user.
