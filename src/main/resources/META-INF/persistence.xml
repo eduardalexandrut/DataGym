@@ -13,6 +13,8 @@
         <class>entity.PesiUtenti</class>
         <class>entity.Serie</class>
         <class>entity.Esercizi</class>
+        <class>entity.Composizioni</class>
+        <class>entity.Periodi</class>
 
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/datagym"/>
