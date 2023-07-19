@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class SchedeController extends Controller {
     private Optional<Schede> scheda = Optional.empty();
     private Optional<Utenti> user = Optional.empty();
+
     private Optional<Esercizi> esercizio = Optional.empty();
 
     @FXML
@@ -87,7 +88,6 @@ public class SchedeController extends Controller {
         }
         initAllenamentiTable();
         initSchedeTable();
-        initSchedaDetails();
         initEserciziTable();
         initSetTable();
     }
@@ -143,6 +143,11 @@ public class SchedeController extends Controller {
         codiceEsCol.setCellValueFactory(new PropertyValueFactory<>("codiceEsercizio"));
         nomeEsCol.setCellValueFactory(new PropertyValueFactory<>("nomeEsercizio"));
         typeEsCol.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        if (getUser().isPresent() && getScheda().isPresent()) {
+            final int scheda = getScheda().get().getCodiceScheda();
+            ObservableList<Esercizi> esercizi = FXCollections.observableArrayList(getQueryManager().getEserciziOfScheda(scheda));
+            eserciziTable.setItems(esercizi);
+        }
     }
 
     public void initSetTable() {
@@ -150,20 +155,16 @@ public class SchedeController extends Controller {
         setDurataCol.setCellValueFactory(new PropertyValueFactory<>("durata"));
         setPausaCol.setCellValueFactory(new PropertyValueFactory<>("pausa"));
         setRepCol.setCellValueFactory(new PropertyValueFactory<>("numeroRep"));
-    }
-
-    public void initSchedaDetails() {
-        if(getScheda().isEmpty()) {
-            this.schedeDetailsBorder.setCenter(new Label("Nessuna scheda selezionata."));
-        }else {
-            this.schedeDetailsBorder.setCenter(new Label(getScheda().get().getNomeScheda()));
+        if (getEsercizio().isPresent()) {
+            final int esercizio = getEsercizio().get().getCodiceEsercizio();
+            ObservableList<Serie> serie = FXCollections.observableArrayList(getQueryManager().getSerieOfEsercizio(esercizio));
+            setTable.setItems(serie);
         }
     }
 
-
     public void setScheda(final Schede scheda) {
         this.scheda = Optional.of(scheda);
-        initSchedaDetails();
+        initEserciziTable();
     }
 
     public Optional<Schede> getScheda() {
@@ -175,6 +176,14 @@ public class SchedeController extends Controller {
     public void setUser(final Optional<Utenti> user) {
         this.user = user;
         initialize();
+    }
+    public Optional<Esercizi> getEsercizio() {
+        return esercizio;
+    }
+
+    public void setEsercizio(Optional<Esercizi> esercizio) {
+        this.esercizio = esercizio;
+        initSetTable();
     }
     private Time convertStrToTime(final String s)  {
         DateFormat dateFormat = new SimpleDateFormat("hh:mm");

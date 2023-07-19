@@ -1,10 +1,8 @@
 package application.model;
 
 import entity.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -77,13 +75,13 @@ public class QueryManager {
     }
 
     public List<Esercizi> getEserciziOfScheda(final int scheda) {
-        return entityManager.createNativeQuery("SELECT * FROM esercizi WHERE scheda = :scheda")
+        return entityManager.createNativeQuery("SELECT * FROM esercizi WHERE scheda = :scheda", Esercizi.class)
                 .setParameter("scheda",scheda)
                 .getResultList();
     }
 
     public List<Serie> getSerieOfEsercizio(final int esercizio) {
-        return entityManager.createNativeQuery("SELECT * FROM serie WHERE esercizio = :esercizio")
+        return entityManager.createNativeQuery("SELECT * FROM serie WHERE esercizio = :esercizio", Serie.class)
                 .setParameter("esercizio", esercizio)
                 .getResultList();
     }

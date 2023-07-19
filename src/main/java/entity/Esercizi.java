@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 
 @Entity
 public class Esercizi {
+    enum Tipologie {
+        CALISTHENICS("Calisthenics"), FREEWEIGHT("Free-weight"), CARDIO("Cardio");
+        private String name;
+        Tipologie(final String name) {
+            this.name = name;
+        }
+    }
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "codiceEsercizio")
@@ -13,7 +20,7 @@ public class Esercizi {
     private String nomeEsercizio;
     @Basic
     @Column(name = "tipo")
-    private Object tipo;
+    private String tipo;
     @Basic
     @Column(name = "scheda")
     private int scheda;
@@ -34,11 +41,11 @@ public class Esercizi {
         this.nomeEsercizio = nomeEsercizio;
     }
 
-    public Object getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(Object tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -73,15 +80,5 @@ public class Esercizi {
         result = 31 * result + (tipo != null ? tipo.hashCode() : 0);
         result = 31 * result + scheda;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Esercizi{" +
-                "codiceEsercizio=" + codiceEsercizio +
-                ", nomeEsercizio='" + nomeEsercizio + '\'' +
-                ", tipo=" + tipo +
-                ", scheda=" + scheda +
-                '}';
     }
 }
